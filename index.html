@@ -90,8 +90,8 @@ header{
     border:1px solid var(--border);
     background:transparent;
     color:var(--text);
-    width:42px;
-    height:42px;
+    width:55px;
+    height:55px;
     border-radius:50%;
     cursor:pointer;
     font-size:1rem;
@@ -256,10 +256,10 @@ footer{
             <a class="nav-link"
             href="https://mohakdev1220.github.io/websites_link"
             target="_blank">
-            Websites Link
+            Other projects
             </a>
 
-            <button class="theme-btn" id="themeToggle">🌙</button>
+            <button class="theme-btn" id="themeToggle">Dark mode </button>
 
         </div>
 
@@ -363,11 +363,11 @@ footer{
                 Websites Link
             </a>
 
-            <a href="about-us.html">
+          <a href="https://mohakdev1220.github.io/facts/About_uS" target="_blank">
                 About Us
             </a>
 
-            <a href="feedback.html">
+   <a href="https://mohakdev1220.github.io/facts/Feedback" target="_blank">
                 Feedback
             </a>
 
@@ -387,7 +387,7 @@ const themeToggle = document.getElementById("themeToggle");
 
 if(localStorage.getItem("theme")==="dark"){
     document.body.classList.add("dark");
-    themeToggle.textContent="☀️";
+    themeToggle.textContent="Light";
 }
 
 themeToggle.addEventListener("click",()=>{
@@ -396,10 +396,10 @@ themeToggle.addEventListener("click",()=>{
 
     if(document.body.classList.contains("dark")){
         localStorage.setItem("theme","dark");
-        themeToggle.textContent="☀️";
+        themeToggle.textContent="Light";
     }else{
         localStorage.setItem("theme","light");
-        themeToggle.textContent="🌙";
+        themeToggle.textContent="Dark";
     }
 
 });
