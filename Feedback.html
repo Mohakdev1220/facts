@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback | Facts</title>
+
+<link rel="icon" type="image/png" href="logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#ffffff;
+    --card:#f7f7f7;
+    --text:#111111;
+    --secondary:#666666;
+    --border:#e5e5e5;
+    --success:#16a34a;
+}
+
+body.dark{
+    --bg:#0f0f0f;
+    --card:#171717;
+    --text:#ffffff;
+    --secondary:#a0a0a0;
+    --border:#2a2a2a;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:.25s ease;
+    min-height:100vh;
+}
+
+.container{
+    width:min(700px,calc(100% - 40px));
+    margin:auto;
+}
+
+header{
+    border-bottom:1px solid var(--border);
+    padding:22px 0;
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    text-decoration:none;
+    color:var(--text);
+    font-weight:800;
+    font-size:1.3rem;
+}
+
+.theme-btn{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    background:transparent;
+    color:var(--text);
+    cursor:pointer;
+}
+
+.feedback-section{
+    padding:70px 0;
+}
+
+.feedback-section h1{
+    text-align:center;
+    font-size:3rem;
+    margin-bottom:12px;
+}
+
+.feedback-section p{
+    text-align:center;
+    color:var(--secondary);
+    margin-bottom:40px;
+}
+
+.form-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:30px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:14px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:var(--bg);
+    color:var(--text);
+    font-family:inherit;
+    font-size:1rem;
+}
+
+textarea{
+    min-height:140px;
+    resize:vertical;
+}
+
+.rating{
+    display:flex;
+    gap:10px;
+}
+
+.rating input{
+    width:auto;
+}
+
+.submit-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:var(--text);
+    color:var(--bg);
+    font-size:1rem;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.submit-btn:hover{
+    opacity:.9;
+}
+
+.success-message{
+    display:none;
+    text-align:center;
+    margin-top:20px;
+    color:var(--success);
+    font-weight:600;
+}
+
+footer{
+    border-top:1px solid var(--border);
+    margin-top:40px;
+}
+
+.footer-links{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    padding:25px;
+}
+
+.footer-links a{
+    color:var(--text);
+    text-decoration:none;
+}
+
+@media(max-width:600px){
+
+.feedback-section h1{
+    font-size:2.3rem;
+}
+
+.form-card{
+    padding:20px;
+}
+
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container navbar">
+<a href="index.html" class="logo">Facts</a>
+<button class="theme-btn" id="themeToggle">🌙</button>
+</div>
+</header>
+
+<section class="feedback-section">
+<div class="container">
+
+<h1>Feedback</h1>
+<p>Help us improve by sharing your feedback.</p>
+
+<div class="form-card">
+
+<form
+id="feedbackForm"
+action="https://formspree.io/f/xkowpdnv"
+method="POST"
+>
+
+<div class="form-group">
+<label>Username</label>
+<input type="text" name="username" required>
+</div>
+
+<div class="form-group">
+<label>Gmail ID</label>
+<input type="email" name="email" required>
+</div>
+
+<div class="form-group">
+<label>Rating</label>
+<select name="rating" required>
+<option value="">Select Rating</option>
+<option>⭐ 1 Star</option>
+<option>⭐⭐ 2 Stars</option>
+<option>⭐⭐⭐ 3 Stars</option>
+<option>⭐⭐⭐⭐ 4 Stars</option>
+<option>⭐⭐⭐⭐⭐ 5 Stars</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Issue Type</label>
+<select name="issue">
+<option>General Feedback</option>
+<option>Bug Report</option>
+<option>Suggestion</option>
+<option>UI / Design</option>
+<option>Content Issue</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Your Feedback</label>
+<textarea
+name="feedback"
+placeholder="Write your feedback here..."
+required
+></textarea>
+</div>
+
+<button type="submit" class="submit-btn">
+Submit Feedback
+</button>
+
+<div class="success-message" id="successMessage">
+✅ Form submitted successfully. Redirecting...
+</div>
+
+</form>
+
+</div>
+
+</div>
+</section>
+
+<footer>
+<div class="footer-links">
+<a href="index">Home</a>
+<a href="about-us">About</a>
+<a href="https://mohakdev1220.github.io/websites_link" target="_blank">Website Directory</a>
+</div>
+</footer>
+
+<script>
+
+const themeToggle = document.getElementById("themeToggle");
+
+if(localStorage.getItem("theme")==="dark"){
+    document.body.classList.add("dark");
+    themeToggle.textContent="☀️";
+}
+
+themeToggle.addEventListener("click",()=>{
+
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+        localStorage.setItem("theme","dark");
+        themeToggle.textContent="☀️";
+    }else{
+        localStorage.setItem("theme","light");
+        themeToggle.textContent="🌙";
+    }
+
+});
+
+const form = document.getElementById("feedbackForm");
+const successMessage = document.getElementById("successMessage");
+
+form.addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const data = new FormData(form);
+
+    const response = await fetch(form.action,{
+        method:"POST",
+        body:data,
+        headers:{
+            'Accept':'application/json'
+        }
+    });
+
+    if(response.ok){
+
+        form.reset();
+
+        successMessage.style.display = "block";
+
+        setTimeout(()=>{
+            window.location.href = "index.html";
+        },3000);
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
