@@ -2,97 +2,429 @@
 <html lang="en">
 <head>
 <meta name="google-site-verification" content="xrZFu5cpuycZgitIQWcRT0DmD7er9zSVNmzWktTYs10" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facts</title> 
-    <link rel="icon" type="image/png" href="logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Gradient background */
-            color: #fff;
-        }
+<title>Facts</title>
 
-        h1 {
-            background-color: rgba(0,0,0,0.6);
-            color: #ffffff;
-            text-align: center;
-            padding: 25px 40px;
-            font-size: 3rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            margin-bottom: 50px;
-            backdrop-filter: blur(5px);
-        }
+<link rel="icon" type="image/png" href="logo.png">
 
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            width: 100%;
-            max-width: 1000px;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-        a.card {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            padding: 30px 20px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.3rem;
-            flex: 1 1 250px;
-            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-            backdrop-filter: blur(5px);
-            text-decoration: none; /* Remove underline */
-        }
+<style>
+:root{
+    --bg:#ffffff;
+    --card:#f7f7f7;
+    --text:#111111;
+    --secondary:#666666;
+    --border:#e5e5e5;
+    --hover:#000000;
+    --hover-text:#ffffff;
+}
 
-        a.card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.4);
-            background-color: rgba(255, 255, 255, 0.2);
-        }
+body.dark{
+    --bg:#0f0f0f;
+    --card:#171717;
+    --text:#ffffff;
+    --secondary:#a0a0a0;
+    --border:#2a2a2a;
+    --hover:#ffffff;
+    --hover-text:#000000;
+}
 
-        @media (max-width: 600px) {
-            a.card {
-                font-size: 1rem;
-                padding: 20px 15px;
-            }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-            h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:.25s ease;
+    min-height:100vh;
+}
+
+.container{
+    width:min(1200px,calc(100% - 40px));
+    margin:auto;
+}
+
+header{
+    padding:22px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.logo{
+    font-size:1.5rem;
+    font-weight:800;
+    letter-spacing:-0.5px;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.nav-link{
+    text-decoration:none;
+    color:var(--text);
+    font-weight:500;
+    font-size:.95rem;
+}
+
+.theme-btn{
+    border:1px solid var(--border);
+    background:transparent;
+    color:var(--text);
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:1rem;
+}
+
+.hero{
+    text-align:center;
+    padding:80px 0 50px;
+}
+
+.hero h1{
+    font-size:clamp(2.8rem,6vw,5rem);
+    font-weight:800;
+    letter-spacing:-2px;
+    margin-bottom:14px;
+}
+
+.hero p{
+    max-width:650px;
+    margin:auto;
+    color:var(--secondary);
+    line-height:1.7;
+    font-size:1.05rem;
+}
+
+.search-wrapper{
+    display:flex;
+    justify-content:center;
+    margin:10px 0 50px;
+}
+
+.search-box{
+    width:min(500px,100%);
+}
+
+.search-box input{
+    width:100%;
+    padding:15px 18px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:var(--bg);
+    color:var(--text);
+    font-size:1rem;
+    outline:none;
+    transition:.2s;
+}
+
+.search-box input:focus{
+    border-color:var(--text);
+}
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:18px;
+    padding-bottom:70px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:24px;
+    text-decoration:none;
+    color:var(--text);
+    transition:.25s ease;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+    background:var(--hover);
+    color:var(--hover-text);
+}
+
+.card h3{
+    font-size:1.05rem;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.card p{
+    font-size:.92rem;
+    line-height:1.6;
+    color:inherit;
+    opacity:.8;
+}
+
+footer{
+    border-top:1px solid var(--border);
+    margin-top:30px;
+}
+
+.footer-content{
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+    flex-wrap:wrap;
+    padding:35px 0;
+}
+
+.footer-left h3{
+    margin-bottom:8px;
+}
+
+.footer-left p{
+    color:var(--secondary);
+    max-width:450px;
+    line-height:1.6;
+}
+
+.footer-links{
+    display:flex;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.footer-links a{
+    text-decoration:none;
+    color:var(--text);
+    font-weight:500;
+}
+
+.copyright{
+    border-top:1px solid var(--border);
+    padding:18px 0;
+    text-align:center;
+    color:var(--secondary);
+    font-size:.9rem;
+}
+
+.hidden{
+    display:none;
+}
+
+@media(max-width:768px){
+
+.hero{
+    padding:60px 0 40px;
+}
+
+.hero h1{
+    font-size:3rem;
+}
+
+.footer-content{
+    flex-direction:column;
+}
+
+}
+</style>
 </head>
+
 <body>
-    <h1>Facts</h1>
-    <div class="container">
-        <a class="card" href="space.html">Facts about <strong>SPACE</strong></a>
-        <a class="card" href="humanbody.html">Facts about <strong>HUMAN BODY</strong></a>
-        <a class="card" href="animal.html">Facts about <strong>ANIMALS</strong></a>
-        <a class="card" href="technology.html">Facts about <strong>TECHNOLOGY</strong></a>
-        <a class="card" href="earth.html">Facts about <strong>EARTH</strong></a>
-        <a class="card" href="food.html">Facts about <strong>FOOD</strong></a>
- <a class="card" href="ocean.html">Facts about <strong>OCEAN</strong></a>
- <a class="card" href="insect.html">Facts about <strong>INSECTS</strong></a>
- <a class="card" href="weather.html">Facts about <strong>WEATHER & CLIMATE</strong></a>
- <a class="card" href="ancient.html">Facts about <strong>ANCIENT CIVILIZATION</strong></a>
+
+<header>
+    <div class="container navbar">
+
+        <div class="logo">Facts</div>
+
+        <div class="nav-right">
+
+            <a class="nav-link"
+            href="https://mohakdev1220.github.io/websites_link"
+            target="_blank">
+            Websites Link
+            </a>
+
+            <button class="theme-btn" id="themeToggle">🌙</button>
+
+        </div>
+
     </div>
+</header>
+
+<section class="hero container">
+
+    <h1>Facts</h1>
+
+    <p>
+        Discover interesting facts about space, animals, technology,
+        nature, history, and the world around us.
+    </p>
+
+</section>
+
+<div class="container">
+
+    <div class="search-wrapper">
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search categories..."
+            >
+        </div>
+    </div>
+
+    <div class="categories" id="cardsContainer">
+
+        <a class="card" href="space.html">
+            <h3>🚀SPACE</h3>
+            <p>Explore planets, stars, galaxies and the mysteries of the universe.</p>
+        </a>
+
+        <a class="card" href="humanbody.html">
+            <h3>🫀 HUMAN BODY</h3>
+            <p>Learn how the human body works and discover amazing biological facts.</p>
+        </a>
+
+        <a class="card" href="animal.html">
+            <h3>🐘 ANIMALS</h3>
+            <p>Interesting facts from the animal kingdom across the world.</p>
+        </a>
+
+        <a class="card" href="technology.html">
+            <h3>💻 TECHNOLOGY</h3>
+            <p>Explore inventions, computers, AI and modern technology.</p>
+        </a>
+
+        <a class="card" href="earth.html">
+            <h3>🌍 EARTH</h3>
+            <p>Learn about our planet, geography, environment and geology.</p>
+        </a>
+
+        <a class="card" href="food.html">
+            <h3>🍔 FOOD</h3>
+            <p>Discover fascinating facts about food, nutrition and cuisine.</p>
+        </a>
+
+        <a class="card" href="ocean.html">
+            <h3>🌊 OCEAN</h3>
+            <p>Explore deep oceans, marine life and underwater mysteries.</p>
+        </a>
+
+        <a class="card" href="insect.html">
+            <h3>🦋 INSECTS</h3>
+            <p>Learn about insects, their behavior and unique abilities.</p>
+        </a>
+
+        <a class="card" href="weather.html">
+            <h3>⛈️ WEATHER & CLIMATE</h3>
+            <p>Understand weather patterns, storms and climate systems.</p>
+        </a>
+
+        <a class="card" href="ancient.html">
+            <h3>🏛️ ANCIENT CIVILIZATION</h3>
+            <p>Explore ancient cultures, empires and historical achievements.</p>
+        </a>
+
+    </div>
+
+</div>
+
+<footer>
+
+    <div class="container footer-content">
+
+        <div class="footer-left">
+            <h3>Facts</h3>
+            <p>
+                A collection of interesting facts covering science,
+                nature, technology, history and more.
+            </p>
+        </div>
+
+        <div class="footer-links">
+
+            <a href="https://mohakdev1220.github.io/websites_link" target="_blank">
+                Websites Link
+            </a>
+
+            <a href="about-us.html">
+                About Us
+            </a>
+
+            <a href="feedback.html">
+                Feedback
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 Facts. All Rights Reserved.
+    </div>
+
+</footer>
+
+<script>
+
+const themeToggle = document.getElementById("themeToggle");
+
+if(localStorage.getItem("theme")==="dark"){
+    document.body.classList.add("dark");
+    themeToggle.textContent="☀️";
+}
+
+themeToggle.addEventListener("click",()=>{
+
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+        localStorage.setItem("theme","dark");
+        themeToggle.textContent="☀️";
+    }else{
+        localStorage.setItem("theme","light");
+        themeToggle.textContent="🌙";
+    }
+
+});
+
+const searchInput=document.getElementById("searchInput");
+
+searchInput.addEventListener("keyup",()=>{
+
+    const filter=searchInput.value.toLowerCase();
+
+    document.querySelectorAll(".card").forEach(card=>{
+
+        const text=card.innerText.toLowerCase();
+
+        if(text.includes(filter)){
+            card.classList.remove("hidden");
+        }else{
+            card.classList.add("hidden");
+        }
+
+    });
+
+});
+
+</script>
+
 </body>
 </html>
-
