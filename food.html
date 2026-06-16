@@ -88,6 +88,15 @@
 <div class="fact">48. Seeds like chia and flax are rich in omega-3 and fiber.</div>
 <div class="fact">49. A balanced diet includes carbohydrates, proteins, fats, vitamins, and minerals.</div>
 <div class="fact">50. Avoiding excessive junk food reduces the risk of obesity and chronic diseases.</div>
+    <div id="footer"></div>
+
+<script>
+fetch("footer.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
 
 </body>
 </html>
