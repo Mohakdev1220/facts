@@ -58,6 +58,15 @@
 <div class="fact">18. Lightning can heat air to temperatures five times hotter than the Sun's surface.</div>
 <div class="fact">19. Hurricanes are called typhoons in the western Pacific.</div>
 <div class="fact">20. Weather satellites help scientists predict storms and monitor climate.</div>
+    <div id="footer"></div>
+
+<script>
+fetch("footer.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
 
 </body>
 </html>
