@@ -61,6 +61,15 @@
     <div class="fact">18. Aircraft windows are made of multiple layers of acrylic for pressure safety.</div>
     <div class="fact">19. Cabin crew are trained to operate emergency exits and door mechanisms.</div>
     <div class="fact">20. Commercial aviation is one of the safest forms of long-distance travel.</div>
+    <div id="footer"></div>
+
+<script>
+fetch("footer.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
 
 </body>
 </html>
