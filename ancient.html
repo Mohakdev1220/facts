@@ -58,6 +58,15 @@
 <div class="fact">18. Ancient civilizations used coins as early currency systems.</div>
 <div class="fact">19. The Assyrians were known for their military organization and libraries.</div>
 <div class="fact">20. Many ancient civilizations worshipped multiple gods in polytheistic religions.</div>
+<div id="footer"></div>
 
+<script>
+fetch("footer.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
+    
 </body>
 </html>
