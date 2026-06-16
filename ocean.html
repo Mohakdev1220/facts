@@ -58,6 +58,15 @@
 <div class="fact">18. Oceans are home to the largest animals on Earth, such as the blue whale.</div>
 <div class="fact">19. Many ocean species remain undiscovered; scientists estimate millions of unknown species live in the deep sea.</div>
 <div class="fact">20. Plastic pollution is one of the biggest threats to ocean health, harming marine life worldwide.</div>
+    <div id="footer"></div>
+
+<script>
+fetch("footer.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
 
 </body>
 </html>
