@@ -58,5 +58,14 @@
 <div class="fact">18. Gorillas can catch human colds and other illnesses.</div>
 <div class="fact">19. A snail can sleep for three years at a time.</div>
 <div class="fact">20. Dolphins have unique whistles that act like their own "names."</div>
+    <div id="footer"></div>
+
+<script>
+fetch("footer.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
 </body>
 </html>
