@@ -58,6 +58,15 @@
 <div class="fact">18. Some butterflies migrate thousands of kilometers during their lifetime.</div>
 <div class="fact">19. Locust swarms can destroy entire crops in a matter of hours.</div>
 <div class="fact">20. Insects play a crucial role in pollination and maintaining ecosystems.</div>
+    <div id="footer"></div>
+
+<script>
+fetch("footer.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("footer").innerHTML = data;
+  });
+</script>
 
 </body>
 </html>
