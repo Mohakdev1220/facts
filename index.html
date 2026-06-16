@@ -385,24 +385,38 @@ footer{
 <script>
 
 const themeToggle = document.getElementById("themeToggle");
+const searchInput = document.getElementById("searchInput");
+
+/* ---------------------------
+   THEME SYSTEM (FIXED)
+---------------------------- */
 
 const savedTheme = localStorage.getItem("theme");
 
-// default = dark
-const isDark = savedTheme === null || savedTheme === "dark";
+// Default = DARK MODE (first visit)
+if (!savedTheme) {
+    document.body.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+    themeToggle.textContent = "Light";
+}
 
-if (isDark) {
+// If user previously selected dark
+else if (savedTheme === "dark") {
     document.body.classList.add("dark");
     themeToggle.textContent = "Light";
-    if (savedTheme === null) localStorage.setItem("theme", "dark");
-} else {
+}
+
+// If user selected light
+else {
+    document.body.classList.remove("dark");
     themeToggle.textContent = "Dark";
 }
 
+/* Toggle button */
 themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
+    const isDark = document.body.classList.toggle("dark");
 
-    if (document.body.classList.contains("dark")) {
+    if (isDark) {
         localStorage.setItem("theme", "dark");
         themeToggle.textContent = "Light";
     } else {
@@ -410,19 +424,23 @@ themeToggle.addEventListener("click", () => {
         themeToggle.textContent = "Dark";
     }
 });
-const searchInput=document.getElementById("searchInput");
 
-searchInput.addEventListener("keyup",()=>{
 
-    const filter=searchInput.value.toLowerCase();
+/* ---------------------------
+   SEARCH FILTER SYSTEM
+---------------------------- */
 
-    document.querySelectorAll(".card").forEach(card=>{
+searchInput.addEventListener("keyup", () => {
 
-        const text=card.innerText.toLowerCase();
+    const filter = searchInput.value.toLowerCase();
 
-        if(text.includes(filter)){
+    document.querySelectorAll(".card").forEach(card => {
+
+        const text = card.innerText.toLowerCase();
+
+        if (text.includes(filter)) {
             card.classList.remove("hidden");
-        }else{
+        } else {
             card.classList.add("hidden");
         }
 
@@ -431,6 +449,5 @@ searchInput.addEventListener("keyup",()=>{
 });
 
 </script>
-
 </body>
 </html>
