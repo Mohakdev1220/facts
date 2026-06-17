@@ -3,42 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Human body Facts</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <title> Human Body Facts </title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --bg: #05070d;
+            --text: #ffffff;
+            --card: rgba(0, 0, 0, 0.42);
+            --link: #ffd700;
+            --heading: #7dd3fc;
+            --heading2: #fbbf24;
+            --button-bg: rgba(255, 255, 255, 0.08);
+            --button-border: rgba(255, 255, 255, 0.15);
+        }
+
+        body.light-mode {
+            --bg: #f5f7fb;
+            --text: #111827;
+            --card: rgba(255, 255, 255, 0.78);
+            --link: #0f62fe;
+            --heading: #2563eb;
+            --heading2: #7c3aed;
+            --button-bg: rgba(17, 24, 39, 0.06);
+            --button-border: rgba(17, 24, 39, 0.12);
+        }
+
         body {
             margin: 0;
             padding: 20px;
             font-family: 'Montserrat', sans-serif;
-            background: Black;
-            background-size: cover;
-            color: #ffffff; /* White text for visibility */
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* Makes text readable on background */
+            background: var(--bg);
+            color: var(--text);
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.35);
+            transition: background 0.25s ease, color 0.25s ease;
         }
+
         h1 {
             text-align: center;
-            font-weight: 600;
-            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin: 10px 0 18px;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            letter-spacing: 0.5px;
+            color: var(--heading);
+            text-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
         }
+
+        .heading-accent {
+            color: var(--heading2);
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
         a {
-            color: #ffd700; /* Gold color for link */
+            color: var(--link);
             text-decoration: underline;
             font-weight: bold;
         }
+
+        .theme-btn {
+            border: 1px solid var(--button-border);
+            background: var(--button-bg);
+            color: var(--text);
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
         .fact {
             margin: 15px 0;
             font-size: 1.1rem;
             line-height: 1.6;
             padding: 10px;
-            background-color: rgba(0, 0, 0, 0.4); /* Slight transparent background behind text for readability */
+            background-color: var(--card);
             border-radius: 8px;
+        }
+
+        #footer {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>20 Interesting human body Facts</h1>
-    <p><a href="index">&larr; Back to Home</a></p>
-<div class="fact">1. The human body has 206 bones in adulthood.</div>
+    <h1> Human body &amp; Interesting Fact </h1>
+
+    <div class="topbar">
+        <p style="margin:0;"><a href="index">&larr; Back to Home</a></p>
+        <button class="theme-btn" id="themeToggle" type="button">Light Mode</button>
+    </div>
+
+   <div class="fact">1. The human body has 206 bones in adulthood.</div>
 <div class="fact">2. Your heart beats around 100,000 times a day.</div>
 <div class="fact">3. The human brain contains approximately 86 billion neurons.</div>
 <div class="fact">4. Your skin is the largest organ of the body.</div>
@@ -58,5 +123,31 @@
 <div class="fact">18. Your body produces about 1 to 1.5 liters of saliva each day.</div>
 <div class="fact">19. The human body can survive without food for more than a month, but only a few days without water.</div>
 <div class="fact">20. The average human brain weighs about 1.4 kilograms (3 pounds).</div>
+
+    <div id="footer"></div>
+
+    <script>
+        const body = document.body;
+        const toggleBtn = document.getElementById("themeToggle");
+
+        function setTheme(isLight) {
+            body.classList.toggle("light-mode", isLight);
+            toggleBtn.textContent = isLight ? "Dark Mode" : "Light Mode";
+            localStorage.setItem("flightFactsTheme", isLight ? "light" : "dark");
+        }
+
+        const savedTheme = localStorage.getItem("flightFactsTheme");
+        setTheme(savedTheme === "light");
+
+        toggleBtn.addEventListener("click", () => {
+            setTheme(!body.classList.contains("light-mode"));
+        });
+
+        fetch("footer.html")
+          .then(res => res.text())
+          .then(data => {
+            document.getElementById("footer").innerHTML = data;
+          });
+    </script>
 </body>
 </html>
