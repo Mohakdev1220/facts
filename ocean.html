@@ -1,71 +1,307 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Human body Facts</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: 'Montserrat', sans-serif;
-            background: Black;
-            background-size: cover;
-            color: #ffffff; /* White text for visibility */
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* Makes text readable on background */
-        }
-        h1 {
-            text-align: center;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-        a {
-            color: #ffd700; /* Gold color for link */
-            text-decoration: underline;
-            font-weight: bold;
-        }
-        .fact {
-            margin: 15px 0;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.4); /* Slight transparent background behind text for readability */
-            border-radius: 8px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ocean Facts</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg1:#021526;
+    --bg2:#03346e;
+    --bg3:#0a2342;
+
+    --text:#ffffff;
+
+    --card:#0d3b66;
+    --card-border:#1f5d99;
+
+    --heading:#7dd3fc;
+    --heading2:#38bdf8;
+
+    --link:#fde68a;
+
+    --btn-bg:#0f4c81;
+    --btn-border:#2a6ca5;
+}
+
+body.light-mode{
+    --bg1:#eaf6ff;
+    --bg2:#dbeafe;
+    --bg3:#ffffff;
+
+    --text:#1f2937;
+
+    --card:#ffffff;
+    --card-border:#c8def5;
+
+    --heading:#0369a1;
+    --heading2:#0284c7;
+
+    --link:#0f766e;
+
+    --btn-bg:#ffffff;
+    --btn-border:#bfd7ee;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    padding:20px;
+    font-family:'Montserrat',sans-serif;
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+
+    background:
+    radial-gradient(circle at 20% 20%, rgba(125,211,252,.10), transparent 20%),
+    radial-gradient(circle at 80% 10%, rgba(56,189,248,.10), transparent 20%),
+    linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3));
+
+    transition:.3s;
+}
+
+/* Bubbles */
+
+.bubble{
+    position:fixed;
+    bottom:-50px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.25);
+    pointer-events:none;
+    z-index:0;
+}
+
+.b1{
+    width:20px;
+    height:20px;
+    left:15%;
+    animation:rise 12s linear infinite;
+}
+
+.b2{
+    width:30px;
+    height:30px;
+    left:45%;
+    animation:rise 15s linear infinite;
+}
+
+.b3{
+    width:15px;
+    height:15px;
+    left:75%;
+    animation:rise 10s linear infinite;
+}
+
+.b4{
+    width:25px;
+    height:25px;
+    left:90%;
+    animation:rise 18s linear infinite;
+}
+
+@keyframes rise{
+    from{
+        transform:translateY(0);
+        opacity:.6;
+    }
+    to{
+        transform:translateY(-120vh);
+        opacity:0;
+    }
+}
+
+/* Whale */
+
+.whale{
+    position:fixed;
+    left:-100px;
+    top:25%;
+    font-size:50px;
+    opacity:.18;
+    pointer-events:none;
+    z-index:0;
+    animation:swim 30s linear infinite;
+}
+
+@keyframes swim{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(120vw);
+    }
+}
+
+.page{
+    max-width:1000px;
+    margin:auto;
+    position:relative;
+    z-index:1;
+}
+
+h1{
+    text-align:center;
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.2rem,4vw,3.6rem);
+    margin:10px 0 20px;
+    color:var(--heading);
+
+    text-shadow:
+    0 0 12px rgba(125,211,252,.35),
+    0 0 24px rgba(125,211,252,.15);
+}
+
+h1 span{
+    color:var(--heading2);
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+a{
+    color:var(--link);
+    font-weight:700;
+}
+
+.theme-btn{
+    padding:10px 14px;
+    border-radius:10px;
+    border:1px solid var(--btn-border);
+    background:var(--btn-bg);
+    color:var(--text);
+    cursor:pointer;
+    font-family:inherit;
+    font-weight:600;
+}
+
+.fact{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-left:5px solid var(--heading);
+
+    border-radius:10px;
+    padding:14px;
+    margin:14px 0;
+
+    line-height:1.7;
+    font-size:1.05rem;
+
+    transition:.2s;
+}
+
+.fact:hover{
+    transform:translateY(-2px);
+}
+
+#footer{
+    margin-top:25px;
+}
+
+@media(max-width:700px){
+    body{
+        padding:14px;
+    }
+
+    .fact{
+        font-size:1rem;
+    }
+
+    .whale{
+        font-size:36px;
+    }
+}
+</style>
+
 </head>
 <body>
-    <h1>20 Interesting human body Facts</h1>
-    <p><a href="index">&larr; Back to Home</a></p>
-<div class="fact">1. Oceans cover about 71% of the Earth's surface.</div>
+
+<div class="bubble b1"></div>
+<div class="bubble b2"></div>
+<div class="bubble b3"></div>
+<div class="bubble b4"></div>
+
+<div class="whale">🐋</div>
+
+<div class="page">
+
+<h1>🌊 Amazing <span>Ocean</span> Facts 🐋</h1>
+
+<div class="topbar">
+    <p style="margin:0;">
+        <a href="index">&larr; Back to Home</a>
+    </p>
+
+```
+<button class="theme-btn" id="themeToggle">
+    Light Mode
+</button>
+```
+
+</div>
+
+<div class="fact">1. Oceans cover about 71% of Earth's surface.</div>
 <div class="fact">2. The Pacific Ocean is the largest and deepest ocean on Earth.</div>
-<div class="fact">3. The Mariana Trench in the Pacific is the deepest part of the world's oceans, reaching about 11,034 meters.</div>
-<div class="fact">4. Oceans contain 97% of the Earth's water.</div>
-<div class="fact">5. The Atlantic Ocean is the second-largest ocean and separates the Americas from Europe and Africa.</div>
-<div class="fact">6. Oceans produce more than 50% of the world's oxygen through phytoplankton.</div>
-<div class="fact">7. The Indian Ocean is the warmest ocean and is located mainly in the tropics.</div>
-<div class="fact">8. Oceans help regulate the Earth's climate by storing and distributing heat.</div>
-<div class="fact">9. The Southern Ocean surrounds Antarctica and is the newest officially recognized ocean.</div>
-<div class="fact">10. Coral reefs are among the most diverse ecosystems found in oceans.</div>
-<div class="fact">11. The ocean floor has mountains, valleys, and even underwater volcanoes, called seamounts.</div>
-<div class="fact">12. Tsunamis are caused by underwater earthquakes or volcanic eruptions.</div>
-<div class="fact">13. Oceans absorb about 30% of carbon dioxide produced by humans, helping reduce climate change.</div>
-<div class="fact">14. Saltwater from oceans contains dissolved minerals and salts, mainly sodium chloride.</div>
-<div class="fact">15. The average depth of the world's oceans is about 3,688 meters (12,100 feet).</div>
-<div class="fact">16. The Great Barrier Reef in Australia is the largest coral reef system in the world.</div>
-<div class="fact">17. Ocean currents, like the Gulf Stream, transport warm and cold water around the globe.</div>
-<div class="fact">18. Oceans are home to the largest animals on Earth, such as the blue whale.</div>
-<div class="fact">19. Many ocean species remain undiscovered; scientists estimate millions of unknown species live in the deep sea.</div>
-<div class="fact">20. Plastic pollution is one of the biggest threats to ocean health, harming marine life worldwide.</div>
-    <div id="footer"></div>
+<div class="fact">3. The Mariana Trench contains the deepest known point in Earth's oceans.</div>
+<div class="fact">4. About 97% of Earth's water is found in the oceans.</div>
+<div class="fact">5. The Atlantic Ocean separates the Americas from Europe and Africa.</div>
+<div class="fact">6. Marine phytoplankton produce a large share of the oxygen released into Earth's atmosphere.</div>
+<div class="fact">7. The Indian Ocean is generally the warmest of the world's major oceans.</div>
+<div class="fact">8. Oceans help regulate global climate by storing and transporting heat.</div>
+<div class="fact">9. The Southern Ocean surrounds Antarctica.</div>
+<div class="fact">10. Coral reefs are among the most biologically diverse ecosystems on Earth.</div>
+<div class="fact">11. The ocean floor contains mountain ranges, trenches, and underwater volcanoes.</div>
+<div class="fact">12. Most tsunamis are triggered by underwater earthquakes.</div>
+<div class="fact">13. Oceans absorb a significant portion of human-generated carbon dioxide.</div>
+<div class="fact">14. Seawater contains dissolved salts, primarily sodium chloride.</div>
+<div class="fact">15. The average depth of the world's oceans is about 3.7 kilometers.</div>
+<div class="fact">16. Australia's Great Barrier Reef is the largest coral reef system on Earth.</div>
+<div class="fact">17. Ocean currents help move warm and cold water around the globe.</div>
+<div class="fact">18. The blue whale, the largest known animal, lives in the oceans.</div>
+<div class="fact">19. Scientists believe many marine species remain undiscovered, especially in the deep ocean.</div>
+<div class="fact">20. Plastic pollution is one of the major threats facing marine ecosystems today.</div>
+
+<div id="footer"></div>
+
+</div>
 
 <script>
+const body = document.body;
+const toggleBtn = document.getElementById("themeToggle");
+const storageKey = "oceanTheme";
+
+function setTheme(isLight){
+    body.classList.toggle("light-mode", isLight);
+    toggleBtn.textContent = isLight ? "Dark Mode" : "Light Mode";
+    localStorage.setItem(storageKey, isLight ? "light" : "dark");
+}
+
+const savedTheme = localStorage.getItem(storageKey);
+setTheme(savedTheme === "light");
+
+toggleBtn.addEventListener("click", () => {
+    setTheme(!body.classList.contains("light-mode"));
+});
+
 fetch("footer.html")
-  .then(res => res.text())
-  .then(data => {
+.then(res => res.text())
+.then(data => {
     document.getElementById("footer").innerHTML = data;
-  });
+})
+.catch(() => {});
 </script>
 
 </body>
