@@ -1,154 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight and Cabin Crew Facts</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flight and Cabin Crew Facts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #020617;
+      --bg-2: #0f172a;
+      --bg-3: #111827;
+      --text: #f8fafc;
+      --card: rgba(15, 23, 42, 0.55);
+      --border: rgba(148, 163, 184, 0.18);
+      --link: #fde68a;
+      --heading: #7dd3fc;
+      --heading-accent: #fbbf24;
+      --button-bg: rgba(255, 255, 255, 0.08);
+      --button-border: rgba(255, 255, 255, 0.14);
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    }
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    body.light-mode {
+      --bg-1: #eaf2ff;
+      --bg-2: #f8fbff;
+      --bg-3: #ffffff;
+      --text: #0f172a;
+      --card: rgba(255, 255, 255, 0.75);
+      --border: rgba(15, 23, 42, 0.12);
+      --link: #1d4ed8;
+      --heading: #2563eb;
+      --heading-accent: #7c3aed;
+      --button-bg: rgba(15, 23, 42, 0.06);
+      --button-border: rgba(15, 23, 42, 0.12);
+      --shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    }
 
-    <style>
-        :root {
-            --bg: #05070d;
-            --text: #ffffff;
-            --card: rgba(0, 0, 0, 0.42);
-            --link: #ffd700;
-            --heading: #7dd3fc;
-            --heading2: #fbbf24;
-            --button-bg: rgba(255, 255, 255, 0.08);
-            --button-border: rgba(255, 255, 255, 0.15);
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        body.light-mode {
-            --bg: #f5f7fb;
-            --text: #111827;
-            --card: rgba(255, 255, 255, 0.78);
-            --link: #0f62fe;
-            --heading: #2563eb;
-            --heading2: #7c3aed;
-            --button-bg: rgba(17, 24, 39, 0.06);
-            --button-border: rgba(17, 24, 39, 0.12);
-        }
+    html, body {
+      min-height: 100%;
+    }
 
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: 'Montserrat', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.35);
-            transition: background 0.25s ease, color 0.25s ease;
-        }
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(125, 211, 252, 0.18), transparent 35%),
+        radial-gradient(circle at 20% 20%, rgba(251, 191, 36, 0.14), transparent 18%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
 
-        h1 {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            margin: 10px 0 18px;
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            letter-spacing: 0.5px;
-            color: var(--heading);
-            text-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
-        }
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        .heading-accent {
-            color: var(--heading2);
-        }
+    body::before {
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255,255,255,0.55) 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 2px);
+      background-size: 140px 140px, 220px 220px, 320px 320px;
+      background-position: 0 0, 40px 80px, 100px 20px;
+      opacity: 0.25;
+      animation: drift 60s linear infinite;
+    }
 
-        .topbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 14px;
-        }
+    body::after {
+      background: linear-gradient(115deg, transparent 0 45%, rgba(255,255,255,0.12) 48%, transparent 51% 100%);
+      opacity: 0.08;
+      transform: translateX(-30%);
+      animation: aurora 14s ease-in-out infinite alternate;
+    }
 
-        a {
-            color: var(--link);
-            text-decoration: underline;
-            font-weight: bold;
-        }
+    @keyframes drift {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-120px, 80px, 0); }
+    }
 
-        .theme-btn {
-            border: 1px solid var(--button-border);
-            background: var(--button-bg);
-            color: var(--text);
-            padding: 10px 14px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 600;
-        }
+    @keyframes aurora {
+      from { transform: translateX(-30%) skewX(-10deg); }
+      to { transform: translateX(30%) skewX(-10deg); }
+    }
 
-        .fact {
-            margin: 15px 0;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            padding: 10px;
-            background-color: var(--card);
-            border-radius: 8px;
-        }
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
+    }
 
-        #footer {
-            margin-top: 20px;
-        }
-    </style>
+    h1 {
+      text-align: center;
+      margin: 10px 0 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 700;
+      color: var(--heading);
+      letter-spacing: 0.4px;
+      text-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    h1 .accent {
+      color: var(--heading-accent);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    a {
+      color: var(--link);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .theme-btn {
+      border: 1px solid var(--button-border);
+      background: var(--button-bg);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .theme-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .fact {
+      margin: 15px 0;
+      font-size: 1.08rem;
+      line-height: 1.65;
+      padding: 12px 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .fact strong {
+      color: var(--heading-accent);
+    }
+
+    #footer {
+      margin-top: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .plane {
+      position: fixed;
+      top: 16%;
+      left: -120px;
+      font-size: 34px;
+      opacity: 0.45;
+      pointer-events: none;
+      z-index: 0;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+      animation: fly 24s linear infinite;
+    }
+
+    .plane::after {
+      content: '';
+      position: absolute;
+      left: -28px;
+      top: 50%;
+      width: 28px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55));
+      transform: translateY(-50%);
+      border-radius: 2px;
+    }
+
+    @keyframes fly {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(8deg);
+      }
+      35% {
+        transform: translate3d(40vw, -24px, 0) rotate(4deg);
+      }
+      70% {
+        transform: translate3d(80vw, -48px, 0) rotate(1deg);
+      }
+      100% {
+        transform: translate3d(120vw, -70px, 0) rotate(-3deg);
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 14px;
+      }
+
+      .fact {
+        font-size: 1rem;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+
+      .plane {
+        font-size: 28px;
+        top: 12%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>20 Flight &amp; Cabin Crew Facts</h1>
+  <div class="plane">✈</div>
+
+  <div class="page">
+    <h1>20 <span class="accent">Flight</span> &amp; Cabin Crew Facts</h1>
 
     <div class="topbar">
-        <p style="margin:0;"><a href="index">&larr; Back to Home</a></p>
-        <button class="theme-btn" id="themeToggle" type="button">Light Mode</button>
+      <p style="margin:0;"><a href="index">&larr; Back to Home</a></p>
+      <button class="theme-btn" id="themeToggle" type="button">Light Mode</button>
     </div>
 
-    <div class="fact">1. Passenger cabins are pressurized to a level that makes breathing possible, but the pressure is still lower than at sea level.</div>
-    <div class="fact">2. Cabin air is refreshed frequently, and modern aircraft use HEPA filtration to help clean the recirculated air.</div>
-    <div class="fact">3. Flight attendants are trained first as safety crew, and service comes after emergency readiness.</div>
-    <div class="fact">4. Oxygen masks usually give only a short supply, enough for the aircraft to descend to a safer altitude.</div>
-    <div class="fact">5. Turbulence can happen in clear skies, so it is not always visible before it starts.</div>
-    <div class="fact">6. Cabin crew must know how to open, arm, and disarm doors for different aircraft and emergency situations.</div>
-    <div class="fact">7. The sterile cockpit rule reduces nonessential conversation during takeoff and landing so pilots stay focused.</div>
-    <div class="fact">8. Aircraft windows are built with multiple layers, and one layer includes a tiny pressure-vent hole for safety.</div>
-    <div class="fact">9. Commercial airplanes are designed to withstand lightning strikes without putting passengers at risk.</div>
-    <div class="fact">10. Cabin crew jump seats are specially secured and used during takeoff and landing for impact protection.</div>
+    <div class="fact">1. Passenger cabins are pressurized so people can breathe comfortably at cruising altitude, even though the pressure is still lower than at sea level.</div>
+    <div class="fact">2. Modern aircraft use HEPA filters to help clean the air that is recirculated inside the cabin.</div>
+    <div class="fact">3. Flight attendants are trained first in safety and emergency procedures, and then in onboard service.</div>
+    <div class="fact">4. Emergency oxygen masks are designed to provide a short supply of oxygen so the aircraft can descend to a safer altitude.</div>
+    <div class="fact">5. Turbulence can occur even when the sky looks clear, because some air movements are invisible.</div>
+    <div class="fact">6. Cabin crew must know how to operate doors, exits, and safety equipment for different aircraft types.</div>
+    <div class="fact">7. The sterile cockpit rule keeps nonessential conversation out of the cockpit during critical flight phases such as takeoff and landing.</div>
+    <div class="fact">8. Airplane windows are made with multiple layers, and the small hole in the inner pane helps with pressure control.</div>
+    <div class="fact">9. Aircraft can safely withstand lightning strikes because they are built with conductive structures and tested for such events.</div>
+    <div class="fact">10. Cabin crew jump seats are specially designed and secured for use during takeoff and landing.</div>
 
-    <div class="fact">11. Flight attendants receive emergency training for fire, smoke, evacuation, first aid, and water landing procedures.</div>
-    <div class="fact">12. Airplane toilets use vacuum systems because they are lighter and more efficient than regular water systems.</div>
-    <div class="fact">13. Cabin crew use standard callouts, briefings, and hand signals so communication stays clear and fast.</div>
-    <div class="fact">14. Emergency slides are designed to help evacuate passengers quickly when every second matters.</div>
-    <div class="fact">15. Pilots and cabin crew often eat different meals so one food-related illness does not affect the whole crew.</div>
-    <div class="fact">16. Crew members are trained to secure loose items because even small objects can become dangerous during turbulence.</div>
-    <div class="fact">17. Cabin lighting is adjusted during flights to support safety checks, sleep cycles, and arrival readiness.</div>
-    <div class="fact">18. Aircraft maintenance is scheduled in strict intervals because safety depends on constant inspection and testing.</div>
-    <div class="fact">19. Commercial aviation uses many layers of safety at once, including crew training, engineering, maintenance, and air traffic control.</div>
-    <div class="fact">20. The safest flights are usually the ones where safety procedures feel boring, because that means everything is working properly.</div>
+    <div class="fact">11. Flight attendants receive emergency training for fire, smoke, evacuation, first aid, and water-land scenarios.</div>
+    <div class="fact">12. Airplane toilets use vacuum systems because they are lighter and more efficient than standard water-flush systems.</div>
+    <div class="fact">13. Cabin crew use standardized briefings, callouts, and hand signals so communication stays clear and fast.</div>
+    <div class="fact">14. Emergency slides are built to help evacuate passengers quickly when every second matters.</div>
+    <div class="fact">15. Pilots and cabin crew often eat different meals so that a food issue does not affect the entire flight crew at once.</div>
+    <div class="fact">16. Crew members are trained to secure loose items because even small objects can become dangerous during strong turbulence.</div>
+    <div class="fact">17. Cabin lighting may be adjusted during different phases of flight to support safety checks and passenger rest.</div>
+    <div class="fact">18. Aircraft undergo regular inspections and maintenance because aviation safety depends on repeated checks and strict standards.</div>
+    <div class="fact">19. Commercial aviation uses multiple layers of safety at once, including engineering, training, maintenance, and air traffic control.</div>
+    <div class="fact">20. The calmest flights are often the safest-looking ones, because a well-run operation can feel routine.</div>
 
     <div id="footer"></div>
+  </div>
 
-    <script>
-        const body = document.body;
-        const toggleBtn = document.getElementById("themeToggle");
+  <script>
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
 
-        function setTheme(isLight) {
-            body.classList.toggle("light-mode", isLight);
-            toggleBtn.textContent = isLight ? "Dark Mode" : "Light Mode";
-            localStorage.setItem("flightFactsTheme", isLight ? "light" : "dark");
-        }
+    function setTheme(isLight) {
+      body.classList.toggle('light-mode', isLight);
+      toggleBtn.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+      localStorage.setItem('flightFactsTheme', isLight ? 'light' : 'dark');
+    }
 
-        const savedTheme = localStorage.getItem("flightFactsTheme");
-        setTheme(savedTheme === "light");
+    const savedTheme = localStorage.getItem('flightFactsTheme');
+    setTheme(savedTheme === 'light');
 
-        toggleBtn.addEventListener("click", () => {
-            setTheme(!body.classList.contains("light-mode"));
-        });
+    toggleBtn.addEventListener('click', () => {
+      setTheme(!body.classList.contains('light-mode'));
+    });
 
-        fetch("footer.html")
-          .then(res => res.text())
-          .then(data => {
-            document.getElementById("footer").innerHTML = data;
-          });
-    </script>
+    fetch('footer')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('footer').innerHTML = data;
+      })
+      .catch(() => {});
+  </script>
 </body>
 </html>
