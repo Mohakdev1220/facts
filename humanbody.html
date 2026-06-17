@@ -1,153 +1,310 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Human Body Facts </title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Human Body Facts</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --bg: #05070d;
-            --text: #ffffff;
-            --card: rgba(0, 0, 0, 0.42);
-            --link: #ffd700;
-            --heading: #7dd3fc;
-            --heading2: #fbbf24;
-            --button-bg: rgba(255, 255, 255, 0.08);
-            --button-border: rgba(255, 255, 255, 0.15);
-        }
+<style>
+:root{
+    --bg1:#1a0000;
+    --bg2:#330000;
+    --bg3:#120000;
 
-        body.light-mode {
-            --bg: #f5f7fb;
-            --text: #111827;
-            --card: rgba(255, 255, 255, 0.78);
-            --link: #0f62fe;
-            --heading: #2563eb;
-            --heading2: #7c3aed;
-            --button-bg: rgba(17, 24, 39, 0.06);
-            --button-border: rgba(17, 24, 39, 0.12);
-        }
+    --text:#ffffff;
 
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: 'Montserrat', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.35);
-            transition: background 0.25s ease, color 0.25s ease;
-        }
+    --card:#2b0000;
+    --card-border:#5c1111;
 
-        h1 {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            margin: 10px 0 18px;
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            letter-spacing: 0.5px;
-            color: var(--heading);
-            text-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
-        }
+    --heading:#ff6b6b;
+    --heading2:#ffb347;
 
-        .heading-accent {
-            color: var(--heading2);
-        }
+    --link:#ffd166;
 
-        .topbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 14px;
-        }
+    --btn-bg:#4a1010;
+    --btn-border:#7a1f1f;
+}
 
-        a {
-            color: var(--link);
-            text-decoration: underline;
-            font-weight: bold;
-        }
+body.light-mode{
+    --bg1:#fff5f5;
+    --bg2:#ffe4e6;
+    --bg3:#ffffff;
 
-        .theme-btn {
-            border: 1px solid var(--button-border);
-            background: var(--button-bg);
-            color: var(--text);
-            padding: 10px 14px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 600;
-        }
+    --text:#1f2937;
 
-        .fact {
-            margin: 15px 0;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            padding: 10px;
-            background-color: var(--card);
-            border-radius: 8px;
-        }
+    --card:#ffffff;
+    --card-border:#f0bcbc;
 
-        #footer {
-            margin-top: 20px;
-        }
-    </style>
+    --heading:#dc2626;
+    --heading2:#ea580c;
+
+    --link:#b91c1c;
+
+    --btn-bg:#ffffff;
+    --btn-border:#e5c5c5;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    padding:20px;
+    font-family:'Montserrat',sans-serif;
+    color:var(--text);
+    overflow-x:hidden;
+    transition:.3s;
+
+    background:
+    radial-gradient(circle at 20% 20%, rgba(255,80,80,.15), transparent 18%),
+    radial-gradient(circle at 80% 10%, rgba(255,150,80,.12), transparent 18%),
+    linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3));
+
+    min-height:100vh;
+    position:relative;
+}
+
+/* Heartbeat pulse */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+
+    background:
+    radial-gradient(circle,
+    rgba(255,80,80,.05) 0%,
+    rgba(255,80,80,.03) 30%,
+    transparent 70%);
+
+    animation:heartbeat 2.5s infinite;
+}
+
+@keyframes heartbeat{
+    0%,100%{
+        transform:scale(1);
+        opacity:.3;
+    }
+
+    25%{
+        transform:scale(1.03);
+        opacity:.5;
+    }
+
+    50%{
+        transform:scale(1);
+        opacity:.25;
+    }
+
+    75%{
+        transform:scale(1.05);
+        opacity:.45;
+    }
+}
+
+/* Floating DNA */
+.dna{
+    position:fixed;
+    font-size:42px;
+    opacity:.12;
+    pointer-events:none;
+    z-index:0;
+}
+
+.dna1{
+    left:-50px;
+    top:20%;
+    animation:float1 18s linear infinite;
+}
+
+.dna2{
+    right:-50px;
+    top:60%;
+    animation:float2 22s linear infinite;
+}
+
+@keyframes float1{
+    from{
+        transform:translateX(0) translateY(0) rotate(0deg);
+    }
+    to{
+        transform:translateX(120vw) translateY(-120px) rotate(360deg);
+    }
+}
+
+@keyframes float2{
+    from{
+        transform:translateX(0) translateY(0) rotate(0deg);
+    }
+    to{
+        transform:translateX(-120vw) translateY(-80px) rotate(-360deg);
+    }
+}
+
+.page{
+    max-width:1000px;
+    margin:auto;
+    position:relative;
+    z-index:1;
+}
+
+h1{
+    text-align:center;
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.2rem,4vw,3.6rem);
+    margin:10px 0 20px;
+    color:var(--heading);
+
+    text-shadow:
+    0 0 12px rgba(255,80,80,.4),
+    0 0 24px rgba(255,80,80,.2);
+}
+
+h1 span{
+    color:var(--heading2);
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+a{
+    color:var(--link);
+    font-weight:700;
+}
+
+.theme-btn{
+    padding:10px 14px;
+    border-radius:10px;
+    border:1px solid var(--btn-border);
+    background:var(--btn-bg);
+    color:var(--text);
+    cursor:pointer;
+    font-family:inherit;
+    font-weight:600;
+}
+
+.fact{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-left:5px solid var(--heading);
+    border-radius:10px;
+
+    padding:14px;
+    margin:14px 0;
+
+    line-height:1.7;
+    font-size:1.05rem;
+
+    transition:.2s;
+}
+
+.fact:hover{
+    transform:translateY(-2px);
+}
+
+#footer{
+    margin-top:25px;
+}
+
+@media(max-width:700px){
+    body{
+        padding:14px;
+    }
+
+    .fact{
+        font-size:1rem;
+    }
+
+    .dna{
+        font-size:30px;
+    }
+}
+</style>
+
 </head>
 <body>
-    <h1> Human body Interesting Fact </h1>
 
-    <div class="topbar">
-        <p style="margin:0;"><a href="index">&larr; Back to Home</a></p>
-        <button class="theme-btn" id="themeToggle" type="button">Light Mode</button>
-    </div>
+<div class="dna dna1">🧬</div>
+<div class="dna dna2">🧬</div>
 
-   <div class="fact">1. The human body has 206 bones in adulthood.</div>
-<div class="fact">2. Your heart beats around 100,000 times a day.</div>
-<div class="fact">3. The human brain contains approximately 86 billion neurons.</div>
-<div class="fact">4. Your skin is the largest organ of the body.</div>
-<div class="fact">5. Humans shed about 600,000 particles of skin every hour.</div>
-<div class="fact">6. The human body has enough iron to make a small nail.</div>
-<div class="fact">7. The stomach gets a new lining every 3 to 4 days to prevent digestion of itself.</div>
-<div class="fact">8. Your bones are stronger than steel of the same density.</div>
-<div class="fact">9. The human nose can detect over 1 trillion different scents.</div>
-<div class="fact">10. The liver can regenerate itself even after losing up to 75% of its mass.</div>
-<div class="fact">11. Your body has more bacterial cells than human cells, mostly in the gut.</div>
-<div class="fact">12. Fingernails grow faster than toenails, at about 3 mm per month.</div>
-<div class="fact">13. The brain uses about 20% of the body's total oxygen supply.</div>
-<div class="fact">14. Your eyes can distinguish approximately 10 million different colors.</div>
-<div class="fact">15. The human body contains around 5 liters of blood.</div>
-<div class="fact">16. Your small intestine is about 6 meters long, making it the longest organ inside your body.</div>
-<div class="fact">17. Humans are the only animals with chins.</div>
-<div class="fact">18. Your body produces about 1 to 1.5 liters of saliva each day.</div>
-<div class="fact">19. The human body can survive without food for more than a month, but only a few days without water.</div>
-<div class="fact">20. The average human brain weighs about 1.4 kilograms (3 pounds).</div>
+<div class="page">
 
-    <div id="footer"></div>
+<h1>❤️ Human Body <span>Facts</span> 🧠</h1>
 
-    <script>
-        const body = document.body;
-        const toggleBtn = document.getElementById("themeToggle");
+<div class="topbar">
+    <p style="margin:0;">
+        <a href="index">&larr; Back to Home</a>
+    </p>
 
-        function setTheme(isLight) {
-            body.classList.toggle("light-mode", isLight);
-            toggleBtn.textContent = isLight ? "Dark Mode" : "Light Mode";
-            localStorage.setItem("flightFactsTheme", isLight ? "light" : "dark");
-        }
+```
+<button class="theme-btn" id="themeToggle">
+    Light Mode
+</button>
+```
 
-        const savedTheme = localStorage.getItem("flightFactsTheme");
-        setTheme(savedTheme === "light");
+</div>
 
-        toggleBtn.addEventListener("click", () => {
-            setTheme(!body.classList.contains("light-mode"));
-        });
+<div class="fact">1. The human body has 206 bones in adulthood.</div>
+<div class="fact">2. Your heart beats around 100,000 times every day.</div>
+<div class="fact">3. The human brain contains roughly 86 billion neurons.</div>
+<div class="fact">4. Your skin is the largest organ in the human body.</div>
+<div class="fact">5. Humans shed hundreds of thousands of skin cells every hour.</div>
+<div class="fact">6. The human body contains enough iron to make a small nail.</div>
+<div class="fact">7. The stomach creates a new protective lining every few days.</div>
+<div class="fact">8. Bone tissue is extremely strong for its weight.</div>
+<div class="fact">9. The human nose can identify an enormous variety of scents.</div>
+<div class="fact">10. The liver can regenerate much of its lost tissue.</div>
+<div class="fact">11. Trillions of microorganisms live inside and on the human body.</div>
+<div class="fact">12. Fingernails usually grow faster than toenails.</div>
+<div class="fact">13. The brain uses about 20% of the body's oxygen supply.</div>
+<div class="fact">14. Human eyes can distinguish millions of different colors.</div>
+<div class="fact">15. An average adult has about 5 liters of blood.</div>
+<div class="fact">16. The small intestine is several meters long and plays a major role in nutrient absorption.</div>
+<div class="fact">17. Humans are the only known animals with a prominent chin.</div>
+<div class="fact">18. Your body produces around 1–1.5 liters of saliva each day.</div>
+<div class="fact">19. Humans can survive much longer without food than without water.</div>
+<div class="fact">20. The average adult brain weighs about 1.3–1.4 kilograms.</div>
 
-        fetch("footer.html")
-          .then(res => res.text())
-          .then(data => {
-            document.getElementById("footer").innerHTML = data;
-          });
-    </script>
+<div id="footer"></div>
+
+</div>
+
+<script>
+const body = document.body;
+const toggleBtn = document.getElementById("themeToggle");
+const storageKey = "humanBodyTheme";
+
+function setTheme(isLight){
+    body.classList.toggle("light-mode", isLight);
+    toggleBtn.textContent = isLight ? "Dark Mode" : "Light Mode";
+    localStorage.setItem(storageKey, isLight ? "light" : "dark");
+}
+
+const savedTheme = localStorage.getItem(storageKey);
+setTheme(savedTheme === "light");
+
+toggleBtn.addEventListener("click", () => {
+    setTheme(!body.classList.contains("light-mode"));
+});
+
+fetch("footer.html")
+.then(res => res.text())
+.then(data => {
+    document.getElementById("footer").innerHTML = data;
+})
+.catch(() => {});
+</script>
+
 </body>
 </html>
