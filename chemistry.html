@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chemistry Facts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #001a0a;
+      --bg-2: #002b12;
+      --bg-3: #003518;
+      --text: #f8fafc;
+      --card: rgba(0, 43, 18, 0.55);
+      --border: rgba(52, 211, 153, 0.18);
+      --link: #6ee7b7;
+      --heading: #34d399;
+      --heading-accent: #38bdf8;
+      --button-bg: rgba(255, 255, 255, 0.08);
+      --button-border: rgba(255, 255, 255, 0.14);
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    }
+    body.light-mode {
+      --bg-1: #ecfdf5;
+      --bg-2: #f0fdfa;
+      --bg-3: #ffffff;
+      --text: #022c22;
+      --card: rgba(255, 255, 255, 0.75);
+      --border: rgba(2, 44, 34, 0.12);
+      --link: #047857;
+      --heading: #065f46;
+      --heading-accent: #0369a1;
+      --button-bg: rgba(2, 44, 34, 0.06);
+      --button-border: rgba(2, 44, 34, 0.12);
+      --shadow: 0 12px 30px rgba(2, 44, 34, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0; padding: 20px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(52, 211, 153, 0.18), transparent 35%),
+        radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.14), transparent 18%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+    body::before, body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    body::before {
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255,255,255,0.55) 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 2px);
+      background-size: 140px 140px, 220px 220px, 320px 320px;
+      background-position: 0 0, 40px 80px, 100px 20px;
+      opacity: 0.25; animation: drift 60s linear infinite;
+    }
+    body::after {
+      background: linear-gradient(115deg, transparent 0 45%, rgba(255,255,255,0.12) 48%, transparent 51% 100%);
+      opacity: 0.08; transform: translateX(-30%);
+      animation: aurora 14s ease-in-out infinite alternate;
+    }
+    @keyframes drift { from { transform: translate3d(0,0,0); } to { transform: translate3d(-120px,80px,0); } }
+    @keyframes aurora { from { transform: translateX(-30%) skewX(-10deg); } to { transform: translateX(30%) skewX(-10deg); } }
+    .page { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
+    h1 {
+      text-align: center; margin: 10px 0 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 700;
+      color: var(--heading); letter-spacing: 0.4px;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.12);
+    }
+    h1 .accent { color: var(--heading-accent); }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    a { color: var(--link); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+    .theme-btn {
+      border: 1px solid var(--button-border); background: var(--button-bg); color: var(--text);
+      padding: 10px 14px; border-radius: 12px; cursor: pointer; font-family: inherit;
+      font-weight: 700; transition: transform 0.2s ease, background 0.2s ease; box-shadow: var(--shadow);
+    }
+    .theme-btn:hover { transform: translateY(-1px); }
+    .fact {
+      margin: 15px 0; font-size: 1.08rem; line-height: 1.65; padding: 12px 14px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      box-shadow: var(--shadow); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .fact strong { color: var(--heading-accent); }
+    #footer { margin-top: 22px; position: relative; z-index: 1; }
+    .plane {
+      position: fixed; top: 16%; left: -120px; font-size: 34px; opacity: 0.45;
+      pointer-events: none; z-index: 0; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+      animation: fly 24s linear infinite;
+    }
+    .plane::after {
+      content: ''; position: absolute; left: -28px; top: 50%; width: 28px; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55));
+      transform: translateY(-50%); border-radius: 2px;
+    }
+    @keyframes fly {
+      0% { transform: translate3d(0,0,0) rotate(8deg); }
+      35% { transform: translate3d(40vw,-24px,0) rotate(4deg); }
+      70% { transform: translate3d(80vw,-48px,0) rotate(1deg); }
+      100% { transform: translate3d(120vw,-70px,0) rotate(-3deg); }
+    }
+    @media (max-width: 640px) {
+      body { padding: 14px; } .fact { font-size: 1rem; }
+      .topbar { align-items: flex-start; } .plane { font-size: 28px; top: 12%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="plane">⚗️</div>
+  <div class="page">
+    <h1>20 <span class="accent">Chemistry</span> Facts</h1>
+    <div class="topbar">
+      <p style="margin:0;"><a href="index">&larr; Back to Home</a></p>
+      <button class="theme-btn" id="themeToggle" type="button">Light Mode</button>
+    </div>
+
+    <div class="fact">1. <strong>Water</strong> is the only naturally occurring substance on Earth that exists as a solid, liquid, and gas within the normal range of temperatures.</div>
+    <div class="fact">2. The <strong>periodic table</strong> currently contains 118 confirmed elements, with the heaviest ones created artificially in laboratories.</div>
+    <div class="fact">3. <strong>Gold</strong> is so chemically unreactive that it never tarnishes or rusts, which is why ancient gold artifacts still shine today.</div>
+    <div class="fact">4. <strong>Oxygen</strong> makes up about 65% of the human body's mass and 21% of Earth's atmosphere by volume.</div>
+    <div class="fact">5. <strong>Diamond</strong> and graphite are both made entirely of carbon atoms — but their vastly different structures produce completely different properties.</div>
+    <div class="fact">6. <strong>Helium</strong> was first discovered on the Sun through spectroscopy before it was ever found on Earth — its name comes from Helios, the Greek sun god.</div>
+    <div class="fact">7. A <strong>single teaspoon of neutron star material</strong> would weigh billions of tonnes because it consists of densely packed nuclear matter.</div>
+    <div class="fact">8. <strong>Dry ice</strong> is solid carbon dioxide that sublimates directly from solid to gas at room temperature, skipping the liquid phase entirely.</div>
+    <div class="fact">9. <strong>Chlorine</strong> added to drinking water in very small amounts kills harmful microorganisms and has saved millions of lives over the past century.</div>
+    <div class="fact">10. <strong>Silicon</strong> is the second most abundant element in Earth's crust and forms the basis of both glass and modern computer chips.</div>
+
+    <div class="fact">11. <strong>Hydrogen</strong> is the most abundant element in the universe, making up about 75% of all normal matter by mass.</div>
+    <div class="fact">12. <strong>Liquid nitrogen</strong> boils at –196°C and is used in medicine, food preservation, and scientific research around the world.</div>
+    <div class="fact">13. The <strong>pH scale</strong> measures acidity and alkalinity — a pH of 7 is neutral, below 7 is acidic, and above 7 is alkaline.</div>
+    <div class="fact">14. <strong>Rust</strong> is the result of iron reacting with oxygen and water in a process called oxidation, which weakens metals over time.</div>
+    <div class="fact">15. <strong>Baking soda and vinegar</strong> react to produce carbon dioxide gas, water, and sodium acetate in a classic acid-base reaction.</div>
+    <div class="fact">16. <strong>Neon signs</strong> glow because electricity excites neon gas atoms, which then emit photons of light as the electrons return to lower energy states.</div>
+    <div class="fact">17. <strong>Mercury</strong> is the only metal that is liquid at room temperature, with a melting point of –39°C.</div>
+    <div class="fact">18. The smell of rain on dry earth is called <strong>petrichor</strong>, caused by chemical compounds released from soil and plants when water hits them.</div>
+    <div class="fact">19. <strong>Ozone</strong> (O₃) is a molecule made of three oxygen atoms that forms a protective layer in the stratosphere, absorbing harmful UV radiation.</div>
+    <div class="fact">20. <strong>Phosphorus</strong> is so reactive that white phosphorus ignites spontaneously in air and must be stored underwater to prevent combustion.</div>
+
+    <div id="footer"></div>
+  </div>
+  <script>
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+    function setTheme(isLight) {
+      body.classList.toggle('light-mode', isLight);
+      toggleBtn.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+      localStorage.setItem('chemistryFactsTheme', isLight ? 'light' : 'dark');
+    }
+    setTheme(localStorage.getItem('chemistryFactsTheme') === 'light');
+    toggleBtn.addEventListener('click', () => setTheme(!body.classList.contains('light-mode')));
+    fetch('footer').then(r => r.text()).then(d => { document.getElementById('footer').innerHTML = d; }).catch(() => {});
+  </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Music Facts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #08001a;
+      --bg-2: #10002e;
+      --bg-3: #150040;
+      --text: #f8fafc;
+      --card: rgba(16, 0, 46, 0.55);
+      --border: rgba(167, 139, 250, 0.18);
+      --link: #a78bfa;
+      --heading: #a78bfa;
+      --heading-accent: #fb7185;
+      --button-bg: rgba(255, 255, 255, 0.08);
+      --button-border: rgba(255, 255, 255, 0.14);
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    }
+    body.light-mode {
+      --bg-1: #faf5ff;
+      --bg-2: #fdf4ff;
+      --bg-3: #ffffff;
+      --text: #1e0033;
+      --card: rgba(255, 255, 255, 0.75);
+      --border: rgba(30, 0, 51, 0.12);
+      --link: #7c3aed;
+      --heading: #6d28d9;
+      --heading-accent: #e11d48;
+      --button-bg: rgba(30, 0, 51, 0.06);
+      --button-border: rgba(30, 0, 51, 0.12);
+      --shadow: 0 12px 30px rgba(30, 0, 51, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0; padding: 20px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(167, 139, 250, 0.18), transparent 35%),
+        radial-gradient(circle at 20% 20%, rgba(251, 113, 133, 0.14), transparent 18%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+    body::before, body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    body::before {
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255,255,255,0.55) 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 2px);
+      background-size: 140px 140px, 220px 220px, 320px 320px;
+      background-position: 0 0, 40px 80px, 100px 20px;
+      opacity: 0.25; animation: drift 60s linear infinite;
+    }
+    body::after {
+      background: linear-gradient(115deg, transparent 0 45%, rgba(255,255,255,0.12) 48%, transparent 51% 100%);
+      opacity: 0.08; transform: translateX(-30%);
+      animation: aurora 14s ease-in-out infinite alternate;
+    }
+    @keyframes drift { from { transform: translate3d(0,0,0); } to { transform: translate3d(-120px,80px,0); } }
+    @keyframes aurora { from { transform: translateX(-30%) skewX(-10deg); } to { transform: translateX(30%) skewX(-10deg); } }
+    .page { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
+    h1 {
+      text-align: center; margin: 10px 0 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 700;
+      color: var(--heading); letter-spacing: 0.4px;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.12);
+    }
+    h1 .accent { color: var(--heading-accent); }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    a { color: var(--link); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+    .theme-btn {
+      border: 1px solid var(--button-border); background: var(--button-bg); color: var(--text);
+      padding: 10px 14px; border-radius: 12px; cursor: pointer; font-family: inherit;
+      font-weight: 700; transition: transform 0.2s ease, background 0.2s ease; box-shadow: var(--shadow);
+    }
+    .theme-btn:hover { transform: translateY(-1px); }
+    .fact {
+      margin: 15px 0; font-size: 1.08rem; line-height: 1.65; padding: 12px 14px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      box-shadow: var(--shadow); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .fact strong { color: var(--heading-accent); }
+    #footer { margin-top: 22px; position: relative; z-index: 1; }
+    .plane {
+      position: fixed; top: 16%; left: -120px; font-size: 34px; opacity: 0.45;
+      pointer-events: none; z-index: 0; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+      animation: fly 24s linear infinite;
+    }
+    .plane::after {
+      content: ''; position: absolute; left: -28px; top: 50%; width: 28px; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55));
+      transform: translateY(-50%); border-radius: 2px;
+    }
+    @keyframes fly {
+      0% { transform: translate3d(0,0,0) rotate(8deg); }
+      35% { transform: translate3d(40vw,-24px,0) rotate(4deg); }
+      70% { transform: translate3d(80vw,-48px,0) rotate(1deg); }
+      100% { transform: translate3d(120vw,-70px,0) rotate(-3deg); }
+    }
+    @media (max-width: 640px) {
+      body { padding: 14px; } .fact { font-size: 1rem; }
+      .topbar { align-items: flex-start; } .plane { font-size: 28px; top: 12%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="plane">🎵</div>
+  <div class="page">
+    <h1>20 <span class="accent">Music</span> Facts</h1>
+    <div class="topbar">
+      <p style="margin:0;"><a href="index">&larr; Back to Home</a></p>
+      <button class="theme-btn" id="themeToggle" type="button">Light Mode</button>
+    </div>
+
+    <div class="fact">1. <strong>Music</strong> activates more areas of the human brain simultaneously than almost any other stimulus, including language.</div>
+    <div class="fact">2. <strong>Beethoven</strong> composed some of his most celebrated symphonies, including his Ninth, after becoming almost completely deaf.</div>
+    <div class="fact">3. The <strong>guitar</strong> is estimated to be the most played instrument in the world, with hundreds of millions of players globally.</div>
+    <div class="fact">4. A <strong>concert A</strong> note vibrates at exactly 440 Hz — a standard tuning frequency agreed upon internationally in 1939.</div>
+    <div class="fact">5. <strong>Mozart</strong> began composing minuets at age 5 and wrote his first symphony at age 8, astonishing courts across Europe.</div>
+    <div class="fact">6. Listening to music you enjoy triggers the release of <strong>dopamine</strong>, the same brain chemical linked to pleasure and reward.</div>
+    <div class="fact">7. The <strong>piano</strong> has 88 keys and over 12,000 individual parts, making it one of the most mechanically complex instruments.</div>
+    <div class="fact">8. <strong>Heavy metal music</strong> has been found in studies to help some listeners process anger, providing an emotional outlet rather than increasing aggression.</div>
+    <div class="fact">9. The world's <strong>oldest known musical instruments</strong> are bone flutes discovered in Germany, estimated to be about 40,000 years old.</div>
+    <div class="fact">10. <strong>Vinyl records</strong> have made a significant commercial comeback in the 21st century, outselling CDs in several recent years.</div>
+
+    <div class="fact">11. <strong>Perfect pitch</strong> — the ability to identify any musical note without a reference — is thought to occur in fewer than 1 in 10,000 people.</div>
+    <div class="fact">12. The <strong>didgeridoo</strong>, a wind instrument developed by Aboriginal Australians, is believed to be one of the world's oldest instruments, dating back over 1,500 years.</div>
+    <div class="fact">13. <strong>Earworms</strong> — songs stuck in your head — tend to have simple, repetitive melodies with a slight unexpected twist in their structure.</div>
+    <div class="fact">14. <strong>Classical music</strong> played in certain environments, like stores and transit stations, has been shown to influence crowd behavior and reduce anxiety.</div>
+    <div class="fact">15. The <strong>theremin</strong> is one of the few instruments played without physical contact — the musician moves their hands in the air near two antennas.</div>
+    <div class="fact">16. <strong>Music therapy</strong> is a recognized clinical practice used to help with pain management, neurological rehabilitation, and emotional wellbeing.</div>
+    <div class="fact">17. <strong>Streaming services</strong> now account for the majority of recorded music revenue, fundamentally changing how artists are paid and discovered.</div>
+    <div class="fact">18. The <strong>human voice</strong> is technically a wind instrument — it uses air passing through vocal cords to produce sound, just like a flute or trumpet.</div>
+    <div class="fact">19. <strong>Cymatics</strong> is the study of how sound vibrations create visual patterns in sand or liquid — different frequencies produce completely different shapes.</div>
+    <div class="fact">20. <strong>Singing together</strong> has been shown to synchronize the heartbeats of people in a choir, creating a measurable physiological bond.</div>
+
+    <div id="footer"></div>
+  </div>
+  <script>
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+    function setTheme(isLight) {
+      body.classList.toggle('light-mode', isLight);
+      toggleBtn.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+      localStorage.setItem('musicFactsTheme', isLight ? 'light' : 'dark');
+    }
+    setTheme(localStorage.getItem('musicFactsTheme') === 'light');
+    toggleBtn.addEventListener('click', () => setTheme(!body.classList.contains('light-mode')));
+    fetch('footer').then(r => r.text()).then(d => { document.getElementById('footer').innerHTML = d; }).catch(() => {});
+  </script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>History Facts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #0c0a00;
+      --bg-2: #1a1400;
+      --bg-3: #1f1a07;
+      --text: #f8fafc;
+      --card: rgba(26, 20, 0, 0.55);
+      --border: rgba(180, 163, 100, 0.18);
+      --link: #fde68a;
+      --heading: #fcd34d;
+      --heading-accent: #f97316;
+      --button-bg: rgba(255, 255, 255, 0.08);
+      --button-border: rgba(255, 255, 255, 0.14);
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    }
+    body.light-mode {
+      --bg-1: #fff8e7;
+      --bg-2: #fffbf0;
+      --bg-3: #ffffff;
+      --text: #1a1400;
+      --card: rgba(255, 255, 255, 0.75);
+      --border: rgba(26, 20, 0, 0.12);
+      --link: #b45309;
+      --heading: #92400e;
+      --heading-accent: #c2410c;
+      --button-bg: rgba(26, 20, 0, 0.06);
+      --button-border: rgba(26, 20, 0, 0.12);
+      --shadow: 0 12px 30px rgba(26, 20, 0, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0; padding: 20px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(252, 211, 77, 0.18), transparent 35%),
+        radial-gradient(circle at 20% 20%, rgba(249, 115, 22, 0.14), transparent 18%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+    body::before, body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    body::before {
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255,255,255,0.55) 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 2px);
+      background-size: 140px 140px, 220px 220px, 320px 320px;
+      background-position: 0 0, 40px 80px, 100px 20px;
+      opacity: 0.25;
+      animation: drift 60s linear infinite;
+    }
+    body::after {
+      background: linear-gradient(115deg, transparent 0 45%, rgba(255,255,255,0.12) 48%, transparent 51% 100%);
+      opacity: 0.08; transform: translateX(-30%);
+      animation: aurora 14s ease-in-out infinite alternate;
+    }
+    @keyframes drift { from { transform: translate3d(0,0,0); } to { transform: translate3d(-120px,80px,0); } }
+    @keyframes aurora { from { transform: translateX(-30%) skewX(-10deg); } to { transform: translateX(30%) skewX(-10deg); } }
+    .page { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
+    h1 {
+      text-align: center; margin: 10px 0 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 700;
+      color: var(--heading); letter-spacing: 0.4px;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.12);
+    }
+    h1 .accent { color: var(--heading-accent); }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    a { color: var(--link); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+    .theme-btn {
+      border: 1px solid var(--button-border); background: var(--button-bg); color: var(--text);
+      padding: 10px 14px; border-radius: 12px; cursor: pointer; font-family: inherit;
+      font-weight: 700; transition: transform 0.2s ease, background 0.2s ease; box-shadow: var(--shadow);
+    }
+    .theme-btn:hover { transform: translateY(-1px); }
+    .fact {
+      margin: 15px 0; font-size: 1.08rem; line-height: 1.65; padding: 12px 14px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      box-shadow: var(--shadow); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .fact strong { color: var(--heading-accent); }
+    #footer { margin-top: 22px; position: relative; z-index: 1; }
+    .plane {
+      position: fixed; top: 16%; left: -120px; font-size: 34px; opacity: 0.45;
+      pointer-events: none; z-index: 0; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+      animation: fly 24s linear infinite;
+    }
+    .plane::after {
+      content: ''; position: absolute; left: -28px; top: 50%; width: 28px; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55));
+      transform: translateY(-50%); border-radius: 2px;
+    }
+    @keyframes fly {
+      0% { transform: translate3d(0,0,0) rotate(8deg); }
+      35% { transform: translate3d(40vw,-24px,0) rotate(4deg); }
+      70% { transform: translate3d(80vw,-48px,0) rotate(1deg); }
+      100% { transform: translate3d(120vw,-70px,0) rotate(-3deg); }
+    }
+    @media (max-width: 640px) {
+      body { padding: 14px; } .fact { font-size: 1rem; }
+      .topbar { align-items: flex-start; } .plane { font-size: 28px; top: 12%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="plane">📜</div>
+  <div class="page">
+    <h1>20 <span class="accent">History</span> Facts</h1>
+    <div class="topbar">
+      <p style="margin:0;"><a href="index">&larr; Back to Home</a></p>
+      <button class="theme-btn" id="themeToggle" type="button">Light Mode</button>
+    </div>
+
+    <div class="fact">1. <strong>Cleopatra VII</strong> lived closer in time to the Moon landing than to the construction of the Great Pyramid of Giza.</div>
+    <div class="fact">2. The <strong>Roman Empire</strong> at its peak covered around 5 million square kilometres and housed roughly one fifth of the world's population.</div>
+    <div class="fact">3. The <strong>Black Death</strong> in the 14th century killed an estimated 30–60% of Europe's population, reshaping its economy and society.</div>
+    <div class="fact">4. <strong>Oxford University</strong> is older than the Aztec Empire — teaching began there around 1096, centuries before Tenochtitlan was founded.</div>
+    <div class="fact">5. The <strong>Great Wall of China</strong> was built over many centuries by different dynasties and is not a single continuous structure.</div>
+    <div class="fact">6. <strong>Viking explorers</strong> reached North America around 500 years before Christopher Columbus made his 1492 voyage.</div>
+    <div class="fact">7. The <strong>Mongol Empire</strong> was the largest contiguous land empire in history, stretching from the Pacific to Eastern Europe.</div>
+    <div class="fact">8. <strong>Napoleon Bonaparte</strong> was not unusually short — his reputation came partly from a misunderstanding of French and English measurement units.</div>
+    <div class="fact">9. The <strong>Library of Alexandria</strong> was one of the largest repositories of knowledge in the ancient world, and its loss has been debated for centuries.</div>
+    <div class="fact">10. <strong>Ancient Egyptians</strong> used a 365-day calendar and were among the first civilizations to develop a standardized writing system.</div>
+
+    <div class="fact">11. The <strong>Silk Road</strong> connected China to the Mediterranean for over a millennium, spreading goods, religions, and ideas across continents.</div>
+    <div class="fact">12. <strong>World War I</strong> was partly triggered by the assassination of Archduke Franz Ferdinand in Sarajevo in June 1914.</div>
+    <div class="fact">13. The <strong>printing press</strong>, invented by Gutenberg around 1440, revolutionized the spread of information across Europe.</div>
+    <div class="fact">14. <strong>Ancient Rome</strong> had a complex system of roads, aqueducts, and public buildings that influenced infrastructure for centuries.</div>
+    <div class="fact">15. The <strong>Industrial Revolution</strong> began in Britain in the late 18th century and transformed manufacturing, transport, and daily life.</div>
+    <div class="fact">16. <strong>Genghis Khan</strong> united the Mongol tribes and created the foundation for one of history's most feared military forces.</div>
+    <div class="fact">17. The <strong>French Revolution</strong> beginning in 1789 reshaped ideas about democracy, human rights, and the role of monarchy in government.</div>
+    <div class="fact">18. <strong>Ancient Greece</strong> gave rise to democracy, philosophy, the Olympic Games, and foundational works of Western literature.</div>
+    <div class="fact">19. The <strong>Cold War</strong> between the United States and Soviet Union lasted from the late 1940s until the dissolution of the USSR in 1991.</div>
+    <div class="fact">20. <strong>Hieroglyphics</strong> were used by ancient Egyptians for over 3,000 years but remained undeciphered until the Rosetta Stone was found in 1799.</div>
+
+    <div id="footer"></div>
+  </div>
+  <script>
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+    function setTheme(isLight) {
+      body.classList.toggle('light-mode', isLight);
+      toggleBtn.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+      localStorage.setItem('historyFactsTheme', isLight ? 'light' : 'dark');
+    }
+    setTheme(localStorage.getItem('historyFactsTheme') === 'light');
+    toggleBtn.addEventListener('click', () => setTheme(!body.classList.contains('light-mode')));
+    fetch('footer').then(r => r.text()).then(d => { document.getElementById('footer').innerHTML = d; }).catch(() => {});
+  </script>
+</body>
+</html>

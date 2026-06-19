@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventions Facts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #0d0d00;
+      --bg-2: #1a1a00;
+      --bg-3: #222200;
+      --text: #f8fafc;
+      --card: rgba(26, 26, 0, 0.55);
+      --border: rgba(253, 224, 71, 0.18);
+      --link: #fde047;
+      --heading: #facc15;
+      --heading-accent: #fb923c;
+      --button-bg: rgba(255, 255, 255, 0.08);
+      --button-border: rgba(255, 255, 255, 0.14);
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    }
+    body.light-mode {
+      --bg-1: #fefce8;
+      --bg-2: #fffbeb;
+      --bg-3: #ffffff;
+      --text: #1c1c00;
+      --card: rgba(255, 255, 255, 0.75);
+      --border: rgba(28, 28, 0, 0.12);
+      --link: #a16207;
+      --heading: #854d0e;
+      --heading-accent: #c2410c;
+      --button-bg: rgba(28, 28, 0, 0.06);
+      --button-border: rgba(28, 28, 0, 0.12);
+      --shadow: 0 12px 30px rgba(28, 28, 0, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0; padding: 20px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(250, 204, 21, 0.18), transparent 35%),
+        radial-gradient(circle at 20% 20%, rgba(251, 146, 60, 0.14), transparent 18%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+    body::before, body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    body::before {
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255,255,255,0.55) 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 2px);
+      background-size: 140px 140px, 220px 220px, 320px 320px;
+      background-position: 0 0, 40px 80px, 100px 20px;
+      opacity: 0.25; animation: drift 60s linear infinite;
+    }
+    body::after {
+      background: linear-gradient(115deg, transparent 0 45%, rgba(255,255,255,0.12) 48%, transparent 51% 100%);
+      opacity: 0.08; transform: translateX(-30%);
+      animation: aurora 14s ease-in-out infinite alternate;
+    }
+    @keyframes drift { from { transform: translate3d(0,0,0); } to { transform: translate3d(-120px,80px,0); } }
+    @keyframes aurora { from { transform: translateX(-30%) skewX(-10deg); } to { transform: translateX(30%) skewX(-10deg); } }
+    .page { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
+    h1 {
+      text-align: center; margin: 10px 0 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 700;
+      color: var(--heading); letter-spacing: 0.4px;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.12);
+    }
+    h1 .accent { color: var(--heading-accent); }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    a { color: var(--link); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+    .theme-btn {
+      border: 1px solid var(--button-border); background: var(--button-bg); color: var(--text);
+      padding: 10px 14px; border-radius: 12px; cursor: pointer; font-family: inherit;
+      font-weight: 700; transition: transform 0.2s ease, background 0.2s ease; box-shadow: var(--shadow);
+    }
+    .theme-btn:hover { transform: translateY(-1px); }
+    .fact {
+      margin: 15px 0; font-size: 1.08rem; line-height: 1.65; padding: 12px 14px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      box-shadow: var(--shadow); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .fact strong { color: var(--heading-accent); }
+    #footer { margin-top: 22px; position: relative; z-index: 1; }
+    .plane {
+      position: fixed; top: 16%; left: -120px; font-size: 34px; opacity: 0.45;
+      pointer-events: none; z-index: 0; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+      animation: fly 24s linear infinite;
+    }
+    .plane::after {
+      content: ''; position: absolute; left: -28px; top: 50%; width: 28px; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55));
+      transform: translateY(-50%); border-radius: 2px;
+    }
+    @keyframes fly {
+      0% { transform: translate3d(0,0,0) rotate(8deg); }
+      35% { transform: translate3d(40vw,-24px,0) rotate(4deg); }
+      70% { transform: translate3d(80vw,-48px,0) rotate(1deg); }
+      100% { transform: translate3d(120vw,-70px,0) rotate(-3deg); }
+    }
+    @media (max-width: 640px) {
+      body { padding: 14px; } .fact { font-size: 1rem; }
+      .topbar { align-items: flex-start; } .plane { font-size: 28px; top: 12%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="plane">💡</div>
+  <div class="page">
+    <h1>20 <span class="accent">Inventions</span> Facts</h1>
+    <div class="topbar">
+      <p style="margin:0;"><a href="index">&larr; Back to Home</a></p>
+      <button class="theme-btn" id="themeToggle" type="button">Light Mode</button>
+    </div>
+
+    <div class="fact">1. The <strong>wheel</strong> was invented around 3500 BC in Mesopotamia — but was initially used for pottery, not transportation.</div>
+    <div class="fact">2. <strong>Penicillin</strong> was discovered accidentally by Alexander Fleming in 1928 when mold contaminated one of his petri dishes.</div>
+    <div class="fact">3. The <strong>World Wide Web</strong> was invented by Tim Berners-Lee in 1989 as a way for scientists to share information across computers.</div>
+    <div class="fact">4. <strong>Thomas Edison</strong> held 1,093 U.S. patents, more than any inventor in American history up to his time.</div>
+    <div class="fact">5. <strong>Velcro</strong> was invented in 1941 by Swiss engineer George de Mestral after he noticed how burr seeds stuck to his dog's fur.</div>
+    <div class="fact">6. The <strong>printing press</strong> invented by Gutenberg around 1440 enabled mass production of books and helped spark the Renaissance and Reformation.</div>
+    <div class="fact">7. <strong>X-rays</strong> were discovered by Wilhelm Röntgen in 1895 — he took the first X-ray image of his wife's hand, showing her bones and ring.</div>
+    <div class="fact">8. The <strong>steam engine</strong>, refined by James Watt in the 1760s, powered the Industrial Revolution and transformed manufacturing and transport.</div>
+    <div class="fact">9. <strong>Coca-Cola</strong> was originally invented by a pharmacist in 1886 and was marketed as a medicinal tonic before becoming a global beverage.</div>
+    <div class="fact">10. <strong>GPS</strong> was originally developed by the U.S. military and only became available for civilian use after the downing of Korean Air Lines Flight 007 in 1983.</div>
+
+    <div class="fact">11. The <strong>transistor</strong>, invented in 1947 at Bell Labs, replaced vacuum tubes and made modern computers, phones, and electronics possible.</div>
+    <div class="fact">12. <strong>Post-it Notes</strong> were invented by accident when a researcher at 3M was trying to develop a strong adhesive but created a weak, repositionable one instead.</div>
+    <div class="fact">13. The <strong>microwave oven</strong> was invented after engineer Percy Spencer noticed his chocolate bar melted while standing near a radar magnetron.</div>
+    <div class="fact">14. <strong>Gunpowder</strong> was invented by Chinese alchemists in the 9th century while they were searching for an elixir of immortality.</div>
+    <div class="fact">15. The <strong>telephone</strong>, patented by Alexander Graham Bell in 1876, beat Elisha Gray's similar patent application by just a matter of hours.</div>
+    <div class="fact">16. <strong>Safety glass</strong> was discovered accidentally in 1903 when a French chemist dropped a flask coated in cellulose nitrate and saw it crack without shattering.</div>
+    <div class="fact">17. The <strong>battery</strong> was invented by Alessandro Volta in 1800 after observing that certain metals produced electricity when in contact with a moist conductor.</div>
+    <div class="fact">18. <strong>Kevlar</strong>, the material used in bulletproof vests, was invented by chemist Stephanie Kwolek at DuPont in 1965 while researching lightweight fibers.</div>
+    <div class="fact">19. The <strong>internet</strong> began as ARPANET in 1969, a U.S. Defense Department network designed to maintain communications in the event of a nuclear attack.</div>
+    <div class="fact">20. <strong>CRISPR gene editing</strong>, developed in the 2010s, allows scientists to precisely modify DNA sequences and has opened new frontiers in medicine and biology.</div>
+
+    <div id="footer"></div>
+  </div>
+  <script>
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+    function setTheme(isLight) {
+      body.classList.toggle('light-mode', isLight);
+      toggleBtn.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+      localStorage.setItem('inventionsFactsTheme', isLight ? 'light' : 'dark');
+    }
+    setTheme(localStorage.getItem('inventionsFactsTheme') === 'light');
+    toggleBtn.addEventListener('click', () => setTheme(!body.classList.contains('light-mode')));
+    fetch('footer').then(r => r.text()).then(d => { document.getElementById('footer').innerHTML = d; }).catch(() => {});
+  </script>
+</body>
+</html>

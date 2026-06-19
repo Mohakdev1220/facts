@@ -1,353 +1,63 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insect Facts</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
-<style>
-:root{
-    --bg1:#0b1d0b;
-    --bg2:#163516;
-    --bg3:#081208;
-
-    --text:#ffffff;
-
-    --card:#183318;
-    --card-border:#2f5d2f;
-
-    --heading:#9be15d;
-    --heading2:#ffd166;
-
-    --link:#ffe082;
-
-    --btn-bg:#214421;
-    --btn-border:#3f7a3f;
-}
-
-body.light-mode{
-    --bg1:#f6fff0;
-    --bg2:#e9f8df;
-    --bg3:#ffffff;
-
-    --text:#1f2937;
-
-    --card:#ffffff;
-    --card-border:#d6e8ca;
-
-    --heading:#2e7d32;
-    --heading2:#ff9800;
-
-    --link:#1b5e20;
-
-    --btn-bg:#ffffff;
-    --btn-border:#cfe0c3;
-}
-
-*{
-    box-sizing:border-box;
-}
-
-body{
-    margin:0;
-    padding:20px;
-    font-family:'Montserrat',sans-serif;
-    color:var(--text);
-    min-height:100vh;
-    overflow-x:hidden;
-
-    background:
-    radial-gradient(circle at 20% 20%, rgba(155,225,93,.12), transparent 20%),
-    radial-gradient(circle at 80% 10%, rgba(255,209,102,.12), transparent 18%),
-    linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3));
-
-    transition:.3s;
-    position:relative;
-}
-
-/* Fireflies */
-
-.firefly{
-    position:fixed;
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    background:#ffd54f;
-    box-shadow:0 0 12px #ffd54f;
-    opacity:.8;
-    pointer-events:none;
-    z-index:0;
-}
-
-.f1{
-    left:10%;
-    animation:fly1 12s linear infinite;
-}
-
-.f2{
-    left:50%;
-    animation:fly2 16s linear infinite;
-}
-
-.f3{
-    left:80%;
-    animation:fly3 14s linear infinite;
-}
-
-@keyframes fly1{
-    from{transform:translateY(100vh);}
-    to{transform:translateY(-100px);}
-}
-
-@keyframes fly2{
-    from{transform:translateY(100vh);}
-    to{transform:translateY(-120px);}
-}
-
-@keyframes fly3{
-    from{transform:translateY(100vh);}
-    to{transform:translateY(-140px);}
-}
-
-/* Butterfly */
-
-.butterfly{
-    position:fixed;
-    top:15%;
-    left:-60px;
-    font-size:32px;
-    opacity:.25;
-    pointer-events:none;
-    z-index:0;
-    animation:butterflyFly 24s linear infinite;
-}
-
-@keyframes butterflyFly{
-    0%{
-        transform:translateX(0) translateY(0);
-    }
-    25%{
-        transform:translateX(30vw) translateY(-40px);
-    }
-    50%{
-        transform:translateX(60vw) translateY(20px);
-    }
-    75%{
-        transform:translateX(90vw) translateY(-30px);
-    }
-    100%{
-        transform:translateX(120vw) translateY(0);
-    }
-}
-
-/* Ant */
-
-.ant{
-    position:fixed;
-    bottom:8px;
-    left:-100px;
-    font-size:22px;
-    opacity:.35;
-    pointer-events:none;
-    animation:antWalk 35s linear infinite;
-}
-
-@keyframes antWalk{
-    from{
-        transform:translateX(0);
-    }
-    to{
-        transform:translateX(120vw);
-    }
-}
-
-.page{
-    max-width:1000px;
-    margin:auto;
-    position:relative;
-    z-index:1;
-}
-
-h1{
-    text-align:center;
-    font-family:'Playfair Display',serif;
-    font-size:clamp(2.2rem,4vw,3.6rem);
-    margin:10px 0 20px;
-
-    color:var(--heading);
-
-    text-shadow:
-    0 0 12px rgba(155,225,93,.35),
-    0 0 24px rgba(155,225,93,.15);
-}
-
-h1 span{
-    color:var(--heading2);
-}
-
-.topbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:20px;
-}
-
-a{
-    color:var(--link);
-    font-weight:700;
-}
-
-.theme-btn{
-    padding:10px 14px;
-    border-radius:10px;
-    border:1px solid var(--btn-border);
-    background:var(--btn-bg);
-    color:var(--text);
-    cursor:pointer;
-    font-family:inherit;
-    font-weight:600;
-}
-
-.fact{
-    background:var(--card);
-    border:1px solid var(--card-border);
-    border-left:5px solid var(--heading);
-
-    border-radius:10px;
-
-    padding:14px;
-    margin:14px 0;
-
-    line-height:1.7;
-    font-size:1.05rem;
-
-    transition:.2s;
-}
-
-.fact:hover{
-    transform:translateY(-2px);
-}
-
-#footer{
-    margin-top:25px;
-}
-
-@media(max-width:700px){
-
-    body{
-        padding:14px;
-    }
-
-    .fact{
-        font-size:1rem;
-    }
-
-    .butterfly{
-        font-size:24px;
-    }
-}
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insects Fact </title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Montserrat', sans-serif;
+            background: Black;
+            background-size: cover;
+            color: #ffffff; /* White text for visibility */
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* Makes text readable on background */
+        }
+        h1 {
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        a {
+            color: #ffd700; /* Gold color for link */
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .fact {
+            margin: 15px 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.4); /* Slight transparent background behind text for readability */
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body>
-
-<div class="firefly f1"></div>
-<div class="firefly f2"></div>
-<div class="firefly f3"></div>
-
-<div class="butterfly">🦋</div>
-<div class="ant">🐜 🐜 🐜</div>
-
-<div class="page">
-
-<h1>🐞 Amazing <span>Insect</span> Facts 🦋</h1>
-
-<div class="topbar">
-    <p style="margin:0;">
-        <a href="index">&larr; Back to Home</a>
-    </p>
-
-<button class="theme-btn" id="themeToggle">
-    Light Mode
-</button>
-
-
-</div>
-
-<div class="fact">1. Insects are the most diverse group of animals on Earth, with over one million described species.</div>
-
-<div class="fact">2. Honey bees communicate the location of food sources through a behavior known as the waggle dance.</div>
-
-<div class="fact">3. Butterflies taste many plants using sensors located on their feet.</div>
-
-<div class="fact">4. Some ants can carry objects many times heavier than their own body weight.</div>
-
-<div class="fact">5. Dragonflies can fly forward, backward, sideways, and even hover in place.</div>
-
-<div class="fact">6. Periodical cicadas spend most of their lives underground and may emerge only every 13 or 17 years.</div>
-
-<div class="fact">7. Insects have an external skeleton called an exoskeleton made largely of chitin.</div>
-
-<div class="fact">8. Termites rely on microorganisms in their digestive systems to help break down wood.</div>
-
-<div class="fact">9. Mosquitoes can spread diseases such as malaria, dengue fever, and yellow fever.</div>
-
-<div class="fact">10. Fireflies create light through a highly efficient chemical reaction called bioluminescence.</div>
-
-<div class="fact">11. Many grasshoppers have hearing organs located on their abdomen rather than their heads.</div>
-
-<div class="fact">12. The Hercules beetle is one of the strongest insects relative to its size.</div>
-
-<div class="fact">13. Praying mantises can rotate their heads about 180 degrees.</div>
-
-<div class="fact">14. Many insects undergo metamorphosis, changing dramatically between juvenile and adult stages.</div>
-
-<div class="fact">15. Many flies have an extremely wide field of view because of their large compound eyes.</div>
-
-<div class="fact">16. Leafcutter ants cultivate fungi and use them as a primary food source.</div>
-
-<div class="fact">17. Insects have existed on Earth for more than 400 million years.</div>
-
-<div class="fact">18. Monarch butterflies are famous for migrations that can span thousands of kilometers.</div>
-
-<div class="fact">19. Large locust swarms can consume enormous amounts of vegetation and damage crops.</div>
-
-<div class="fact">20. Insects play essential roles in pollination, decomposition, and maintaining healthy ecosystems.</div>
-
-<div id="footer"></div>
-
-</div>
-
-<script>
-const body = document.body;
-const toggleBtn = document.getElementById("themeToggle");
-const storageKey = "insectTheme";
-
-function setTheme(isLight){
-    body.classList.toggle("light-mode",isLight);
-    toggleBtn.textContent = isLight ? "Dark Mode" : "Light Mode";
-    localStorage.setItem(storageKey,isLight ? "light" : "dark");
-}
-
-const savedTheme = localStorage.getItem(storageKey);
-setTheme(savedTheme === "light");
-
-toggleBtn.addEventListener("click",()=>{
-    setTheme(!body.classList.contains("light-mode"));
-});
-
-fetch("footer.html")
-.then(res=>res.text())
-.then(data=>{
-    document.getElementById("footer").innerHTML=data;
-})
-.catch(()=>{});
-</script>
+    <h1>20 Interesting insects Facts</h1>
+    <p><a href="index.html">&larr; Back to Home</a></p>
+<div class="fact">1. Insects are the largest group of animals on Earth, with over a million described species.</div>
+<div class="fact">2. Bees communicate with each other using a “waggle dance.”</div>
+<div class="fact">3. Butterflies taste with their feet.</div>
+<div class="fact">4. Ants can lift objects 10–50 times their own body weight.</div>
+<div class="fact">5. Dragonflies can fly in all directions, including backward.</div>
+<div class="fact">6. Some insects, like cicadas, emerge only once every 13 or 17 years.</div>
+<div class="fact">7. Insects have exoskeletons made of chitin, which protects their bodies.</div>
+<div class="fact">8. Termites can digest wood with the help of microorganisms in their guts.</div>
+<div class="fact">9. Mosquitoes are responsible for transmitting diseases like malaria and dengue.</div>
+<div class="fact">10. Fireflies produce light through a chemical reaction called bioluminescence.</div>
+<div class="fact">11. Grasshoppers have ears on their abdomen, not their head.</div>
+<div class="fact">12. Some beetles can live up to 30 years, like the giant wood-boring beetle.</div>
+<div class="fact">13. Praying mantises can turn their heads 180 degrees to scan their surroundings.</div>
+<div class="fact">14. Many insects undergo metamorphosis, transforming from larva to adult.</div>
+<div class="fact">15. Flies have compound eyes, allowing them to see almost 360 degrees.</div>
+<div class="fact">16. Certain ants farm fungi as their food source.</div>
+<div class="fact">17. Insects have been around for more than 400 million years.</div>
+<div class="fact">18. Some butterflies migrate thousands of kilometers during their lifetime.</div>
+<div class="fact">19. Locust swarms can destroy entire crops in a matter of hours.</div>
+<div class="fact">20. Insects play a crucial role in pollination and maintaining ecosystems.</div>
 
 </body>
 </html>

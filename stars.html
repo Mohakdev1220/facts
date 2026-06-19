@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stars &amp; Galaxies Facts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #000008;
+      --bg-2: #030310;
+      --bg-3: #050518;
+      --text: #f8fafc;
+      --card: rgba(3, 3, 16, 0.55);
+      --border: rgba(165, 180, 252, 0.18);
+      --link: #c7d2fe;
+      --heading: #818cf8;
+      --heading-accent: #e879f9;
+      --button-bg: rgba(255, 255, 255, 0.08);
+      --button-border: rgba(255, 255, 255, 0.14);
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    }
+    body.light-mode {
+      --bg-1: #eef2ff;
+      --bg-2: #f5f3ff;
+      --bg-3: #ffffff;
+      --text: #1e1b4b;
+      --card: rgba(255, 255, 255, 0.75);
+      --border: rgba(30, 27, 75, 0.12);
+      --link: #4338ca;
+      --heading: #3730a3;
+      --heading-accent: #a21caf;
+      --button-bg: rgba(30, 27, 75, 0.06);
+      --button-border: rgba(30, 27, 75, 0.12);
+      --shadow: 0 12px 30px rgba(30, 27, 75, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0; padding: 20px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(129, 140, 248, 0.18), transparent 35%),
+        radial-gradient(circle at 20% 20%, rgba(232, 121, 249, 0.14), transparent 18%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+    body::before, body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    body::before {
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255,255,255,0.55) 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 2px);
+      background-size: 140px 140px, 220px 220px, 320px 320px;
+      background-position: 0 0, 40px 80px, 100px 20px;
+      opacity: 0.35; animation: drift 60s linear infinite;
+    }
+    body::after {
+      background: linear-gradient(115deg, transparent 0 45%, rgba(255,255,255,0.12) 48%, transparent 51% 100%);
+      opacity: 0.08; transform: translateX(-30%);
+      animation: aurora 14s ease-in-out infinite alternate;
+    }
+    @keyframes drift { from { transform: translate3d(0,0,0); } to { transform: translate3d(-120px,80px,0); } }
+    @keyframes aurora { from { transform: translateX(-30%) skewX(-10deg); } to { transform: translateX(30%) skewX(-10deg); } }
+    .page { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
+    h1 {
+      text-align: center; margin: 10px 0 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 700;
+      color: var(--heading); letter-spacing: 0.4px;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.12);
+    }
+    h1 .accent { color: var(--heading-accent); }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    a { color: var(--link); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+    .theme-btn {
+      border: 1px solid var(--button-border); background: var(--button-bg); color: var(--text);
+      padding: 10px 14px; border-radius: 12px; cursor: pointer; font-family: inherit;
+      font-weight: 700; transition: transform 0.2s ease, background 0.2s ease; box-shadow: var(--shadow);
+    }
+    .theme-btn:hover { transform: translateY(-1px); }
+    .fact {
+      margin: 15px 0; font-size: 1.08rem; line-height: 1.65; padding: 12px 14px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      box-shadow: var(--shadow); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .fact strong { color: var(--heading-accent); }
+    #footer { margin-top: 22px; position: relative; z-index: 1; }
+    .plane {
+      position: fixed; top: 16%; left: -120px; font-size: 34px; opacity: 0.45;
+      pointer-events: none; z-index: 0; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+      animation: fly 24s linear infinite;
+    }
+    .plane::after {
+      content: ''; position: absolute; left: -28px; top: 50%; width: 28px; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55));
+      transform: translateY(-50%); border-radius: 2px;
+    }
+    @keyframes fly {
+      0% { transform: translate3d(0,0,0) rotate(8deg); }
+      35% { transform: translate3d(40vw,-24px,0) rotate(4deg); }
+      70% { transform: translate3d(80vw,-48px,0) rotate(1deg); }
+      100% { transform: translate3d(120vw,-70px,0) rotate(-3deg); }
+    }
+    @media (max-width: 640px) {
+      body { padding: 14px; } .fact { font-size: 1rem; }
+      .topbar { align-items: flex-start; } .plane { font-size: 28px; top: 12%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="plane">⭐</div>
+  <div class="page">
+    <h1>20 <span class="accent">Stars</span> &amp; Galaxies Facts</h1>
+    <div class="topbar">
+      <p style="margin:0;"><a href="index">&larr; Back to Home</a></p>
+      <button class="theme-btn" id="themeToggle" type="button">Light Mode</button>
+    </div>
+
+    <div class="fact">1. The <strong>observable universe</strong> contains an estimated two trillion galaxies, each hosting billions to trillions of stars.</div>
+    <div class="fact">2. <strong>Light from the Sun</strong> takes about 8 minutes and 20 seconds to reach Earth — so we always see the Sun as it was slightly in the past.</div>
+    <div class="fact">3. <strong>Neutron stars</strong> are so dense that a teaspoon of their material would weigh about 10 million tonnes on Earth.</div>
+    <div class="fact">4. The <strong>Milky Way galaxy</strong> is estimated to contain between 100 and 400 billion stars and is about 100,000 light-years across.</div>
+    <div class="fact">5. <strong>Black holes</strong> don't actually "suck" — objects only fall in if they cross the event horizon, the point of no return where escape velocity exceeds the speed of light.</div>
+    <div class="fact">6. The <strong>largest known star</strong>, UY Scuti, is so massive that if placed at the center of our Solar System, it would extend beyond the orbit of Jupiter.</div>
+    <div class="fact">7. <strong>Supernovae</strong> — the explosive deaths of massive stars — are responsible for creating and spreading most of the heavy elements in the universe, including iron and gold.</div>
+    <div class="fact">8. The <strong>Andromeda Galaxy</strong> is on a collision course with the Milky Way, expected to merge in about 4.5 billion years.</div>
+    <div class="fact">9. <strong>Dark matter</strong> makes up about 27% of the universe's total mass-energy, yet it has never been directly detected — we only infer it from gravity's effects.</div>
+    <div class="fact">10. <strong>Pulsars</strong> are rapidly rotating neutron stars that emit beams of electromagnetic radiation — some spin hundreds of times per second.</div>
+
+    <div class="fact">11. The <strong>cosmic microwave background</strong> is faint radiation left over from the Big Bang, detectable in every direction we look in the universe.</div>
+    <div class="fact">12. <strong>Stars</strong> are born inside giant clouds of gas and dust called nebulae, which collapse under gravity until nuclear fusion ignites at their cores.</div>
+    <div class="fact">13. <strong>White dwarfs</strong> are the remnants of stars like our Sun — after billions of years they slowly cool into cold, dark objects called black dwarfs.</div>
+    <div class="fact">14. The <strong>Hubble Space Telescope</strong>, launched in 1990, has captured images of galaxies over 13 billion light-years away, near the edge of the observable universe.</div>
+    <div class="fact">15. <strong>Gravitational waves</strong>, ripples in spacetime predicted by Einstein in 1915, were first directly detected in 2015 from the collision of two black holes.</div>
+    <div class="fact">16. <strong>The Sun</strong> converts about 600 million tonnes of hydrogen into helium every second through nuclear fusion — and has enough fuel for another 5 billion years.</div>
+    <div class="fact">17. <strong>Quasars</strong> are among the most luminous objects in the universe — powered by supermassive black holes consuming vast amounts of matter.</div>
+    <div class="fact">18. <strong>Every atom</strong> of carbon, oxygen, and iron in your body was forged inside a star that exploded long before our Solar System was born.</div>
+    <div class="fact">19. The <strong>James Webb Space Telescope</strong>, launched in 2021, can observe the universe in infrared light, revealing galaxies that formed just a few hundred million years after the Big Bang.</div>
+    <div class="fact">20. <strong>Exoplanets</strong> — planets orbiting other stars — number in the thousands of confirmed discoveries, with some located in the "habitable zone" where liquid water might exist.</div>
+
+    <div id="footer"></div>
+  </div>
+  <script>
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+    function setTheme(isLight) {
+      body.classList.toggle('light-mode', isLight);
+      toggleBtn.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+      localStorage.setItem('starsFactsTheme', isLight ? 'light' : 'dark');
+    }
+    setTheme(localStorage.getItem('starsFactsTheme') === 'light');
+    toggleBtn.addEventListener('click', () => setTheme(!body.classList.contains('light-mode')));
+    fetch('footer').then(r => r.text()).then(d => { document.getElementById('footer').innerHTML = d; }).catch(() => {});
+  </script>
+</body>
+</html>

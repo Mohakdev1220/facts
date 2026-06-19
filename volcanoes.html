@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Volcanoes &amp; Natural Disasters Facts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #1a0000;
+      --bg-2: #2d0500;
+      --bg-3: #380800;
+      --text: #f8fafc;
+      --card: rgba(45, 5, 0, 0.55);
+      --border: rgba(252, 165, 100, 0.18);
+      --link: #fca5a5;
+      --heading: #fb923c;
+      --heading-accent: #fbbf24;
+      --button-bg: rgba(255, 255, 255, 0.08);
+      --button-border: rgba(255, 255, 255, 0.14);
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    }
+    body.light-mode {
+      --bg-1: #fff7ed;
+      --bg-2: #fff1e6;
+      --bg-3: #ffffff;
+      --text: #431407;
+      --card: rgba(255, 255, 255, 0.75);
+      --border: rgba(67, 20, 7, 0.12);
+      --link: #c2410c;
+      --heading: #9a3412;
+      --heading-accent: #a16207;
+      --button-bg: rgba(67, 20, 7, 0.06);
+      --button-border: rgba(67, 20, 7, 0.12);
+      --shadow: 0 12px 30px rgba(67, 20, 7, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0; padding: 20px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(251, 146, 60, 0.18), transparent 35%),
+        radial-gradient(circle at 20% 20%, rgba(251, 191, 36, 0.14), transparent 18%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+    body::before, body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    body::before {
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255,255,255,0.55) 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 2px);
+      background-size: 140px 140px, 220px 220px, 320px 320px;
+      background-position: 0 0, 40px 80px, 100px 20px;
+      opacity: 0.25; animation: drift 60s linear infinite;
+    }
+    body::after {
+      background: linear-gradient(115deg, transparent 0 45%, rgba(255,255,255,0.12) 48%, transparent 51% 100%);
+      opacity: 0.08; transform: translateX(-30%);
+      animation: aurora 14s ease-in-out infinite alternate;
+    }
+    @keyframes drift { from { transform: translate3d(0,0,0); } to { transform: translate3d(-120px,80px,0); } }
+    @keyframes aurora { from { transform: translateX(-30%) skewX(-10deg); } to { transform: translateX(30%) skewX(-10deg); } }
+    .page { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
+    h1 {
+      text-align: center; margin: 10px 0 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 700;
+      color: var(--heading); letter-spacing: 0.4px;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.12);
+    }
+    h1 .accent { color: var(--heading-accent); }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    a { color: var(--link); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+    .theme-btn {
+      border: 1px solid var(--button-border); background: var(--button-bg); color: var(--text);
+      padding: 10px 14px; border-radius: 12px; cursor: pointer; font-family: inherit;
+      font-weight: 700; transition: transform 0.2s ease, background 0.2s ease; box-shadow: var(--shadow);
+    }
+    .theme-btn:hover { transform: translateY(-1px); }
+    .fact {
+      margin: 15px 0; font-size: 1.08rem; line-height: 1.65; padding: 12px 14px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      box-shadow: var(--shadow); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .fact strong { color: var(--heading-accent); }
+    #footer { margin-top: 22px; position: relative; z-index: 1; }
+    .plane {
+      position: fixed; top: 16%; left: -120px; font-size: 34px; opacity: 0.45;
+      pointer-events: none; z-index: 0; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+      animation: fly 24s linear infinite;
+    }
+    .plane::after {
+      content: ''; position: absolute; left: -28px; top: 50%; width: 28px; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55));
+      transform: translateY(-50%); border-radius: 2px;
+    }
+    @keyframes fly {
+      0% { transform: translate3d(0,0,0) rotate(8deg); }
+      35% { transform: translate3d(40vw,-24px,0) rotate(4deg); }
+      70% { transform: translate3d(80vw,-48px,0) rotate(1deg); }
+      100% { transform: translate3d(120vw,-70px,0) rotate(-3deg); }
+    }
+    @media (max-width: 640px) {
+      body { padding: 14px; } .fact { font-size: 1rem; }
+      .topbar { align-items: flex-start; } .plane { font-size: 28px; top: 12%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="plane">🌋</div>
+  <div class="page">
+    <h1>20 <span class="accent">Volcanoes</span> &amp; Natural Disasters Facts</h1>
+    <div class="topbar">
+      <p style="margin:0;"><a href="index">&larr; Back to Home</a></p>
+      <button class="theme-btn" id="themeToggle" type="button">Light Mode</button>
+    </div>
+
+    <div class="fact">1. There are approximately <strong>1,500 potentially active volcanoes</strong> on Earth, with around 50 erupting in any given year.</div>
+    <div class="fact">2. <strong>Lava</strong> can reach temperatures between 700°C and 1,200°C — hot enough to melt most metals on contact.</div>
+    <div class="fact">3. The <strong>1815 eruption of Mount Tambora</strong> in Indonesia was so large it caused a global drop in temperatures, leading to crop failures known as the "Year Without a Summer."</div>
+    <div class="fact">4. <strong>Tsunamis</strong> can travel across open ocean at speeds of up to 800 km/h — as fast as a commercial jet aircraft.</div>
+    <div class="fact">5. The <strong>Richter scale</strong> is logarithmic — a magnitude 7 earthquake releases about 31 times more energy than a magnitude 6.</div>
+    <div class="fact">6. <strong>Volcanic ash clouds</strong> can travel thousands of kilometres and disrupt air travel, agriculture, and global temperatures for years.</div>
+    <div class="fact">7. The <strong>Ring of Fire</strong>, a horseshoe-shaped zone around the Pacific Ocean, is home to about 75% of the world's volcanoes and 90% of its earthquakes.</div>
+    <div class="fact">8. <strong>Tornadoes</strong> can generate wind speeds exceeding 480 km/h, making them the most violent atmospheric storms on Earth.</div>
+    <div class="fact">9. <strong>Pompeii</strong>, buried by the eruption of Mount Vesuvius in 79 AD, was so rapidly covered that it preserved remarkable details of Roman daily life.</div>
+    <div class="fact">10. <strong>Hurricanes</strong> gain energy from warm ocean water — they weaken rapidly when they move over land or cooler seas.</div>
+
+    <div class="fact">11. <strong>Flash floods</strong> are the deadliest weather-related hazard in many countries, as rapidly rising water can overwhelm people within minutes.</div>
+    <div class="fact">12. The <strong>1931 China floods</strong> are considered among the deadliest natural disasters in history, affecting millions across the Yangtze and Huai river basins.</div>
+    <div class="fact">13. <strong>Geysers</strong> like Old Faithful erupt because underground water is superheated by magma and periodically forced upward through narrow channels.</div>
+    <div class="fact">14. <strong>Avalanches</strong> can reach speeds of 300 km/h within seconds of triggering, and the air blast ahead of one can itself be destructive.</div>
+    <div class="fact">15. <strong>Volcanic lightning</strong> occurs during eruptions when ash particles collide and generate static electricity, producing spectacular storm effects.</div>
+    <div class="fact">16. <strong>Sinkholes</strong> form when underground rock, often limestone, is dissolved by groundwater over time until the surface above collapses.</div>
+    <div class="fact">17. The <strong>2004 Indian Ocean tsunami</strong>, triggered by a magnitude 9.1 earthquake, caused waves reaching 30 metres and affected 14 countries.</div>
+    <div class="fact">18. <strong>Pyroclastic flows</strong> — fast-moving currents of hot gas and volcanic matter — can travel at over 700 km/h and are among the most deadly volcanic hazards.</div>
+    <div class="fact">19. <strong>Drought</strong> is the natural disaster that affects the most people globally, impacting agriculture, water supplies, and ecosystems over prolonged periods.</div>
+    <div class="fact">20. <strong>Early warning systems</strong> for earthquakes and tsunamis, combined with public education, have dramatically reduced casualties from natural disasters in recent decades.</div>
+
+    <div id="footer"></div>
+  </div>
+  <script>
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+    function setTheme(isLight) {
+      body.classList.toggle('light-mode', isLight);
+      toggleBtn.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+      localStorage.setItem('volcanoFactsTheme', isLight ? 'light' : 'dark');
+    }
+    setTheme(localStorage.getItem('volcanoFactsTheme') === 'light');
+    toggleBtn.addEventListener('click', () => setTheme(!body.classList.contains('light-mode')));
+    fetch('footer').then(r => r.text()).then(d => { document.getElementById('footer').innerHTML = d; }).catch(() => {});
+  </script>
+</body>
+</html>

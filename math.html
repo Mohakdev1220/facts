@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mathematics Facts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #020617;
+      --bg-2: #0a0f1e;
+      --bg-3: #0d1528;
+      --text: #f8fafc;
+      --card: rgba(10, 15, 30, 0.55);
+      --border: rgba(99, 179, 237, 0.18);
+      --link: #93c5fd;
+      --heading: #60a5fa;
+      --heading-accent: #34d399;
+      --button-bg: rgba(255, 255, 255, 0.08);
+      --button-border: rgba(255, 255, 255, 0.14);
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    }
+    body.light-mode {
+      --bg-1: #eff6ff;
+      --bg-2: #f0f9ff;
+      --bg-3: #ffffff;
+      --text: #1e3a5f;
+      --card: rgba(255, 255, 255, 0.75);
+      --border: rgba(30, 58, 95, 0.12);
+      --link: #1d4ed8;
+      --heading: #1e40af;
+      --heading-accent: #047857;
+      --button-bg: rgba(30, 58, 95, 0.06);
+      --button-border: rgba(30, 58, 95, 0.12);
+      --shadow: 0 12px 30px rgba(30, 58, 95, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0; padding: 20px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(96, 165, 250, 0.18), transparent 35%),
+        radial-gradient(circle at 20% 20%, rgba(52, 211, 153, 0.14), transparent 18%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+    body::before, body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    body::before {
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255,255,255,0.55) 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 2px);
+      background-size: 140px 140px, 220px 220px, 320px 320px;
+      background-position: 0 0, 40px 80px, 100px 20px;
+      opacity: 0.25; animation: drift 60s linear infinite;
+    }
+    body::after {
+      background: linear-gradient(115deg, transparent 0 45%, rgba(255,255,255,0.12) 48%, transparent 51% 100%);
+      opacity: 0.08; transform: translateX(-30%);
+      animation: aurora 14s ease-in-out infinite alternate;
+    }
+    @keyframes drift { from { transform: translate3d(0,0,0); } to { transform: translate3d(-120px,80px,0); } }
+    @keyframes aurora { from { transform: translateX(-30%) skewX(-10deg); } to { transform: translateX(30%) skewX(-10deg); } }
+    .page { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
+    h1 {
+      text-align: center; margin: 10px 0 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 700;
+      color: var(--heading); letter-spacing: 0.4px;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.12);
+    }
+    h1 .accent { color: var(--heading-accent); }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    a { color: var(--link); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+    .theme-btn {
+      border: 1px solid var(--button-border); background: var(--button-bg); color: var(--text);
+      padding: 10px 14px; border-radius: 12px; cursor: pointer; font-family: inherit;
+      font-weight: 700; transition: transform 0.2s ease, background 0.2s ease; box-shadow: var(--shadow);
+    }
+    .theme-btn:hover { transform: translateY(-1px); }
+    .fact {
+      margin: 15px 0; font-size: 1.08rem; line-height: 1.65; padding: 12px 14px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      box-shadow: var(--shadow); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .fact strong { color: var(--heading-accent); }
+    #footer { margin-top: 22px; position: relative; z-index: 1; }
+    .plane {
+      position: fixed; top: 16%; left: -120px; font-size: 34px; opacity: 0.45;
+      pointer-events: none; z-index: 0; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+      animation: fly 24s linear infinite;
+    }
+    .plane::after {
+      content: ''; position: absolute; left: -28px; top: 50%; width: 28px; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55));
+      transform: translateY(-50%); border-radius: 2px;
+    }
+    @keyframes fly {
+      0% { transform: translate3d(0,0,0) rotate(8deg); }
+      35% { transform: translate3d(40vw,-24px,0) rotate(4deg); }
+      70% { transform: translate3d(80vw,-48px,0) rotate(1deg); }
+      100% { transform: translate3d(120vw,-70px,0) rotate(-3deg); }
+    }
+    @media (max-width: 640px) {
+      body { padding: 14px; } .fact { font-size: 1rem; }
+      .topbar { align-items: flex-start; } .plane { font-size: 28px; top: 12%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="plane">🔢</div>
+  <div class="page">
+    <h1>20 <span class="accent">Mathematics</span> Facts</h1>
+    <div class="topbar">
+      <p style="margin:0;"><a href="index">&larr; Back to Home</a></p>
+      <button class="theme-btn" id="themeToggle" type="button">Light Mode</button>
+    </div>
+
+    <div class="fact">1. <strong>Zero</strong> was not used as a number in many ancient cultures — it was formally developed in India and later adopted by Arab mathematicians.</div>
+    <div class="fact">2. <strong>Pi (π)</strong> is an irrational number, meaning its decimal expansion never repeats and never ends — it has been calculated to over 100 trillion digits.</div>
+    <div class="fact">3. The <strong>Fibonacci sequence</strong> (0, 1, 1, 2, 3, 5, 8…) appears in patterns throughout nature, from flower petals to spiral shells.</div>
+    <div class="fact">4. A <strong>googol</strong> is 10 to the power of 100 — a number so large it exceeds the estimated number of atoms in the observable universe.</div>
+    <div class="fact">5. <strong>Prime numbers</strong> have fascinated mathematicians for millennia — the largest known prime as of recent years has tens of millions of digits.</div>
+    <div class="fact">6. <strong>Euler's identity</strong> (e^iπ + 1 = 0) is often called the most beautiful equation in mathematics, linking five fundamental constants.</div>
+    <div class="fact">7. The <strong>Pythagorean theorem</strong> has over 370 known proofs, making it one of the most proved theorems in mathematical history.</div>
+    <div class="fact">8. <strong>Infinity</strong> comes in different sizes — mathematician Georg Cantor proved that some infinities are larger than others.</div>
+    <div class="fact">9. A <strong>Möbius strip</strong> has only one surface and one edge — if you draw a line along its middle, you return to the start without lifting your pen.</div>
+    <div class="fact">10. <strong>Probability</strong> was largely developed in the 17th century as mathematicians tried to solve gambling problems for French aristocrats.</div>
+
+    <div class="fact">11. The <strong>four-colour theorem</strong> states that any map can be coloured using only four colours so no two adjacent regions share the same colour.</div>
+    <div class="fact">12. <strong>Negative numbers</strong> were once considered absurd by many European mathematicians and only became widely accepted in the 18th century.</div>
+    <div class="fact">13. <strong>Fractal geometry</strong>, developed largely by Benoit Mandelbrot, describes self-similar patterns that appear in coastlines, clouds, and snowflakes.</div>
+    <div class="fact">14. The <strong>number 1</strong> is neither prime nor composite — it is classified as a unit in number theory.</div>
+    <div class="fact">15. <strong>Cryptography</strong> — the mathematics behind secure internet connections — relies heavily on the difficulty of factoring very large prime numbers.</div>
+    <div class="fact">16. <strong>Archimedes</strong> calculated a remarkably accurate approximation of pi around 250 BC using polygons inscribed in circles.</div>
+    <div class="fact">17. A <strong>perfect number</strong> equals the sum of its divisors (excluding itself) — 6 is perfect because 1 + 2 + 3 = 6.</div>
+    <div class="fact">18. <strong>Game theory</strong>, pioneered by John von Neumann, uses mathematics to model strategic decision-making in economics, politics, and biology.</div>
+    <div class="fact">19. <strong>The Königsberg Bridge Problem</strong>, solved by Euler in 1736, is considered the birth of graph theory and topology.</div>
+    <div class="fact">20. <strong>Andrew Wiles</strong> spent seven years in secret solving Fermat's Last Theorem in 1994, a problem that had stumped mathematicians for 358 years.</div>
+
+    <div id="footer"></div>
+  </div>
+  <script>
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+    function setTheme(isLight) {
+      body.classList.toggle('light-mode', isLight);
+      toggleBtn.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+      localStorage.setItem('mathFactsTheme', isLight ? 'light' : 'dark');
+    }
+    setTheme(localStorage.getItem('mathFactsTheme') === 'light');
+    toggleBtn.addEventListener('click', () => setTheme(!body.classList.contains('light-mode')));
+    fetch('footer').then(r => r.text()).then(d => { document.getElementById('footer').innerHTML = d; }).catch(() => {});
+  </script>
+</body>
+</html>

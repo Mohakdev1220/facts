@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Pro Suite | Toolbox Hub</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #7efaff;
+            --secondary: #e0c3fc;
+            --accent: #8ec5fc;
+            --glass: rgba(255, 255, 255, 0.12);
+            --text: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            /* New Stylish Cyber Gradient */
+            background: linear-gradient(-45deg, #243b55, #141e30, #7b4397, #dc2430);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Refresh Button */
+        .refresh-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 10px 15px;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        .refresh-btn:hover { background: rgba(255,255,255,0.2); transform: rotate(15deg); }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            background: rgba(0,0,0,0.3);
+            padding: 6px;
+            border-radius: 50px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .tab {
+            padding: 12px 28px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #8ec5fc 0%, #e0c3fc 100%);
+            color: #111;
+            box-shadow: 0 8px 20px rgba(142, 197, 252, 0.4);
+        }
+
+        /* Main Container */
+        .container {
+            background: var(--glass);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 35px;
+            padding: 35px;
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            animation: slideIn 0.8s ease;
+        }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* Camera & Upload Area */
+        #video-preview {
+            width: 100%;
+            border-radius: 20px;
+            background: #000;
+            display: none;
+            margin-bottom: 15px;
+            border: 2px solid var(--accent);
+        }
+
+        .upload-area {
+            border: 2px dashed rgba(255,255,255,0.4);
+            border-radius: 25px;
+            padding: 50px 20px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(255,255,255,0.03);
+        }
+        .upload-area.dragover { border-color: var(--primary); background: rgba(126, 250, 255, 0.1); }
+
+        #crop-container { max-height: 350px; border-radius: 15px; overflow: hidden; margin: 15px 0; display: none; }
+
+        /* UI Components */
+        input[type="text"] {
+            width: 100%;
+            padding: 16px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.2);
+            color: white;
+            outline: none;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        input[type="text"]:focus { border-color: var(--primary); background: rgba(0,0,0,0.4); }
+
+        .btn {
+            background: linear-gradient(135deg, #8ec5fc 0%, #e0c3fc 100%);
+            border: none;
+            padding: 16px 30px;
+            border-radius: 50px;
+            color: #111;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(142, 197, 252, 0.5); }
+
+        #qrcode {
+            margin: 25px auto;
+            padding: 15px;
+            background: white;
+            border-radius: 20px;
+            display: none;
+            width: fit-content;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        #result-box {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            display: none;
+            word-break: break-all;
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: pop 0.4s ease;
+        }
+        @keyframes pop { from { scale: 0.9; opacity: 0; } to { scale: 1; opacity: 1; } }
+
+        footer { margin-top: auto; padding: 20px; opacity: 0.7; font-size: 13px; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+
+<button class="refresh-btn" onclick="location.reload()">
+    <span>🔄</span> Refresh Page
+</button>
+
+<div class="tabs">
+    <div class="tab active" onclick="switchTab('scan')">Scan QR</div>
+    <div class="tab" onclick="switchTab('generate')">Generate QR</div>
+</div>
+
+<div class="container">
+    <div id="scan-section" class="section active">
+        <h2 style="margin-bottom:10px;">🔍 Scan Anything</h2>
+        
+        <div style="display:flex; gap:10px; margin-bottom:15px;">
+            <button class="btn" onclick="startCamera()">📷 Open Camera</button>
+            <button class="btn" style="background:rgba(255,255,255,0.1); color:white;" onclick="stopCamera()">⏹️ Stop</button>
+        </div>
+
+        <video id="video-preview" autoplay playsinline></video>
+        <canvas id="hidden-canvas" style="display:none;"></canvas>
+
+        <div class="upload-area" id="drop-zone">
+            <p>Drag & Drop Image or<br><span style="color:var(--primary); font-weight:bold;">Browse Files</span></p>
+            <input type="file" id="fileInput" accept="image/*" hidden>
+        </div>
+
+        <div id="crop-container">
+            <img id="image-to-crop">
+        </div>
+
+        <button id="extractBtn" class="btn" style="display:none;" onclick="scanCroppedImage()">Extract Now</button>
+        
+        <div id="result-box"></div>
+    </div>
+
+    <div id="generate-section" class="section">
+        <h2 style="margin-bottom:15px;">✨ Create New QR</h2>
+        <input type="text" id="qr-input" placeholder="Enter URL, Text or Wi-Fi...">
+        <button class="btn" onclick="generateQR()">Generate Now</button>
+        <div id="qrcode"></div>
+        <button id="dlBtn" class="btn" style="display:none; background:#2ecc71;" onclick="downloadQR()">📥 Download PNG</button>
+    </div>
+</div>
+
+<footer>Developed by <strong>Mohak Choubey</strong></footer>
+
+<script>
+    let cropper;
+    let stream = null;
+    let isScanning = false;
+
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('fileInput');
+    const resultBox = document.getElementById('result-box');
+    const video = document.getElementById('video-preview');
+
+    function switchTab(mode) {
+        stopCamera();
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        if(mode === 'scan') {
+            document.querySelector('.tab:nth-child(1)').classList.add('active');
+            document.getElementById('scan-section').classList.add('active');
+        } else {
+            document.querySelector('.tab:nth-child(2)').classList.add('active');
+            document.getElementById('generate-section').classList.add('active');
+        }
+    }
+
+    // --- DRAG & DROP & UPLOAD ---
+    dropZone.onclick = () => fileInput.click();
+    dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('dragover'); };
+    dropZone.ondragleave = () => dropZone.classList.remove('dragover');
+    dropZone.ondrop = (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        handleFile(e.dataTransfer.files[0]);
+    };
+    fileInput.onchange = (e) => handleFile(e.target.files[0]);
+
+    function handleFile(file) {
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            stopCamera();
+            const img = document.getElementById('image-to-crop');
+            img.src = e.target.result;
+            document.getElementById('crop-container').style.display = 'block';
+            document.getElementById('extractBtn').style.display = 'block';
+            dropZone.style.display = 'none';
+            if (cropper) cropper.destroy();
+            cropper = new Cropper(img, { viewMode: 1, autoCropArea: 0.8 });
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // --- SCANNER LOGIC ---
+    function scanCroppedImage() {
+        const canvas = cropper.getCroppedCanvas();
+        const code = jsQR(canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data, canvas.width, canvas.height);
+        showResult(code ? code.data : null);
+    }
+
+    async function startCamera() {
+        try {
+            stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+            video.srcObject = stream;
+            video.style.display = "block";
+            dropZone.style.display = "none";
+            document.getElementById('crop-container').style.display = "none";
+            document.getElementById('extractBtn').style.display = "none";
+            isScanning = true;
+            requestAnimationFrame(tick);
+        } catch (err) {
+            alert("Camera not accessible.");
+        }
+    }
+
+    function stopCamera() {
+        if (stream) {
+            stream.getTracks().forEach(t => t.stop());
+            video.style.display = "none";
+            dropZone.style.display = "block";
+            isScanning = false;
+        }
+    }
+
+    function tick() {
+        if (video.readyState === video.HAVE_ENOUGH_DATA && isScanning) {
+            const canvas = document.getElementById('hidden-canvas');
+            canvas.height = video.videoHeight;
+            canvas.width = video.videoWidth;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const code = jsQR(imageData.data, imageData.width, imageData.height);
+            if (code) {
+                showResult(code.data);
+                stopCamera();
+                return;
+            }
+        }
+        if (isScanning) requestAnimationFrame(tick);
+    }
+
+    function showResult(data) {
+        resultBox.style.display = "block";
+        if (data) {
+            resultBox.innerHTML = `<span style="color:#2ecc71; font-weight:bold;">Success!</span><br><br><span style="font-size:14px;">${data}</span>`;
+        } else {
+            resultBox.innerHTML = `<span style="color:#ff4b2b;">No QR found.</span><br>Try cropping tighter!`;
+        }
+    }
+
+    // --- GENERATOR LOGIC ---
+    function generateQR() {
+        const text = document.getElementById('qr-input').value;
+        const qrDiv = document.getElementById('qrcode');
+        if(!text) return alert("Enter some text first!");
+        qrDiv.innerHTML = "";
+        qrDiv.style.display = "block";
+        new QRCode(qrDiv, { text: text, width: 220, height: 220, colorDark: "#111", colorLight: "#fff" });
+        document.getElementById('dlBtn').style.display = "block";
+    }
+
+    function downloadQR() {
+        const link = document.createElement('a');
+        link.download = 'QR_Export.png';
+        link.href = document.querySelector('#qrcode img').src;
+        link.click();
+    }
+</script>
+
+</body>
+</html>
