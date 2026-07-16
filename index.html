@@ -21,6 +21,10 @@
     --border:#e5e5e5;
     --hover:#000000;
     --hover-text:#ffffff;
+    
+    /* Special colors for starting 3 cards (Light Mode) */
+    --featured-bg: linear-gradient(135deg, #eef5ff 0%, #e0ecff 100%);
+    --featured-border: #cbd5e1;
 }
 
 body.dark{
@@ -31,6 +35,10 @@ body.dark{
     --border:#2a2a2a;
     --hover:#ffffff;
     --hover-text:#000000;
+    
+    /* Special colors for starting 3 cards (Dark Mode) */
+    --featured-bg: linear-gradient(135deg, #131d2e 0%, #1a273b 100%);
+    --featured-border: #2e3e56;
 }
 
 *{
@@ -167,6 +175,13 @@ header{
     color:var(--hover-text);
 }
 
+/* Unique style for the first 3 featured cards */
+.featured-card {
+    background: var(--featured-bg);
+    border: 1px solid var(--featured-border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
 .card h3{
     font-size:1.05rem;
     font-weight:700;
@@ -292,17 +307,21 @@ footer{
 
     <div class="categories" id="cardsContainer"> 
 
-        <a class="card" href="Flight_and_cabin-crew_facts">
+        <!-- Featured Card 1 -->
+        <a class="card featured-card" href="Flight_and_cabin-crew_facts">
             <h3>✈️ Flight and Cabin Crew</h3>
             <p>Explore facts related to sky, flight secrets and cabin crew.</p>
         </a> 
 
-         <a class="card" href="https://mohakdev1220.github.io/facts/nda">
-            <h3>🛡️NDA </h3>
+        <!-- Featured Card 2 -->
+         <a class="card featured-card" href="https://mohakdev1220.github.io/facts/nda">
+            <h3>🛡️ NDA</h3>
             <p>Explore facts National defence Academy</p>
         </a>
-         <a class="card" href="https://mohakdev1220.github.io/facts/facts-by-mohak-data-science">
-            <h3>🛡️NDA </h3>
+
+        <!-- Featured Card 3 (Corrected Title to Data Science) -->
+         <a class="card featured-card" href="https://mohakdev1220.github.io/facts/facts-by-mohak-data-science">
+            <h3>📊 DATA SCIENCE</h3>
             <p>Explore facts Related to Data science</p>
         </a>
 
