@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>20 Mind-Bending Data Science Facts</title>
+  
+  <!-- Sleek Coding Fonts: Fira Code & Space Grotesk -->
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* Dark Theme: Deep Cyber Space & Glowing Neon */
+      --bg-1: #03001e; /* Void Black-Purple */
+      --bg-2: #0f0c1b; /* Dark Neural Blue */
+      --bg-3: #111122; /* Pure Tech Slate */
+      --text: #e2e8f0;
+      
+      /* Card looks like a high-tech glass HUD */
+      --card: rgba(15, 12, 30, 0.7); 
+      --border: rgba(56, 189, 248, 0.35); /* Electric Cyan */
+      --link: #a855f7; /* Neon Purple */
+      --heading: #38bdf8; /* Cyber Cyan */
+      --heading-accent: #22c55e; /* Matrix Green */
+      --button-bg: rgba(56, 189, 248, 0.08);
+      --button-border: rgba(56, 189, 248, 0.3);
+      --shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(56, 189, 248, 0.1);
+    }
+
+    body.light-mode {
+      /* Light Theme: Pristine Research Paper / High-Contrast Lab White */
+      --bg-1: #f8fafc; /* Crisp White */
+      --bg-2: #f1f5f9; /* Soft Platinum */
+      --bg-3: #e2e8f0; /* Concrete Gray */
+      --text: #0f172a;
+      --card: rgba(255, 255, 255, 0.95);
+      --border: rgba(100, 116, 139, 0.3); /* Muted Slate */
+      --link: #2563eb; /* Cobalt Blue */
+      --heading: #1e293b; /* Deep Indigo Slate */
+      --heading-accent: #ea580c; /* High-contrast Orange */
+      --button-bg: rgba(15, 23, 42, 0.06);
+      --button-border: rgba(15, 23, 42, 0.15);
+      --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(168, 85, 247, 0.12), transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.12), transparent 25%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2) 50%, var(--bg-3));
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+
+    /* Subtle background noise (Simulating Digital Static) */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Cfilter id='noiseFilter'%3%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/%3%3C/filter%3%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3%3C/svg%3%3E");
+      opacity: 0.04;
+      mix-blend-mode: overlay;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 10px 0 25px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      color: var(--heading);
+      letter-spacing: -1px;
+      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    h1 .accent {
+      color: var(--heading-accent);
+      font-family: 'Fira Code', monospace;
+    }
+
+    /* Coding visual terminal prompt effect under header */
+    h1::after {
+      content: '[] = fetch_insights()';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: var(--heading-accent);
+      opacity: 0.7;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+    }
+
+    a {
+      color: var(--link);
+      font-weight: 700;
+      text-decoration: none;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .theme-btn {
+      border: 1px dashed var(--button-border);
+      background: var(--button-bg);
+      color: var(--text);
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      box-shadow: var(--shadow);
+    }
+
+    .theme-btn:hover {
+      background: var(--heading-accent);
+      color: #03001e;
+      border-style: solid;
+      transform: translateY(-1px);
+    }
+
+    .fact {
+      margin: 20px 0;
+      font-size: 1.08rem;
+      line-height: 1.7;
+      padding: 18px 22px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--heading); /* High contrast accent line */
+      border-radius: 6px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: relative;
+    }
+
+    /* Custom binary indicators (01 / 10) inside each card corners */
+    .fact::before, .fact::after {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.65rem;
+      position: absolute;
+      opacity: 0.3;
+    }
+    .fact::before { content: '01'; top: 6px; right: 8px; }
+    .fact::after { content: '>>'; bottom: 6px; right: 8px; }
+
+    .fact strong {
+      color: var(--heading-accent);
+      font-family: 'Fira Code', monospace;
+      font-size: 1.02rem;
+    }
+
+    #footer {
+      margin-top: 30px;
+      padding: 15px 0;
+      text-align: center;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      opacity: 0.5;
+    }
+
+    /* DYNAMIC FLOATING DATA SYMBOLS (Replacing Plane/Tanks) */
+    .data-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      font-family: 'Fira Code', monospace;
+      color: var(--heading);
+      font-weight: 700;
+      opacity: 0.15; /* Extremely subtle */
+    }
+
+    /* Brackets drifting across the top */
+    .brackets {
+      top: 15%;
+      left: -100px;
+      font-size: 48px;
+      animation: driftSlow 22s linear infinite;
+    }
+
+    /* Summation Symbol moving across the bottom half */
+    .sigma {
+      top: 60%;
+      left: -100px;
+      font-size: 56px;
+      animation: driftFast 30s linear infinite;
+    }
+
+    @keyframes driftSlow {
+      0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+      50% { transform: translate3d(50vw, -40px, 0) rotate(180deg); }
+      100% { transform: translate3d(120vw, -10px, 0) rotate(360deg); }
+    }
+
+    @keyframes driftFast {
+      0% { transform: translate3d(0, 0, 0) scale(0.8); }
+      100% { transform: translate3d(120vw, -100px, 0) scale(1.2); }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 14px;
+      }
+
+      h1 {
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
+      }
+
+      .fact {
+        font-size: 0.98rem;
+        padding: 14px 18px;
+      }
+
+      .topbar {
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .theme-btn {
+        padding: 8px 12px;
+        font-size: 0.75rem;
+      }
+
+      .data-particle {
+        opacity: 0.08;
+      }
+      .brackets { font-size: 32px; }
+      .sigma { font-size: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Data Particles -->
+  <div class="data-particle brackets">{ }</div>
+  <div class="data-particle sigma">∑</div>
+
+  <div class="page">
+    <h1>20 <span class="accent">Data Science</span> Facts</h1>
+
+    <div class="topbar">
+      <p style="margin:0;"><a href="index">&larr; Back to Home</a></p>
+      <button class="theme-btn" id="themeToggle" type="button">Terminal Mode</button>
+    </div>
+
+    <div class="fact">1. The term <strong>"Data Science"</strong> was first used in 1960 by Peter Naur as a substitute for computer science, and it was only in 2001 that it was introduced as an independent discipline.</div>
+    <div class="fact">2. Around <strong>90% of the world's total data</strong> has been generated in just the last few years, showcasing the exponential speed of modern digital expansion.</div>
+    <div class="fact">3. Despite the complexity of AI, data scientists spend about <strong>60% to 80% of their time</strong> simply cleaning and organizing messy raw data rather than building models.</div>
+    <div class="fact">4. <strong>Python</strong> is the undisputed king of data science, but <strong>SQL</strong> remains the critical backbone for querying almost all enterprise databases.</div>
+    <div class="fact">5. The "curse of dimensionality" refers to a phenomenon where adding more variables/features makes data points so sparse that analytical models actually perform worse.</div>
+    <div class="fact">6. Overfitting happens when an AI model memorizes training data so perfectly that it fails to predict real-world, unseen data correctly.</div>
+    <div class="fact">7. The classic <strong>"Monty Hall Problem"</strong> is a probability puzzle that constantly trips up humans but is easily solved using Bayes' Theorem.</div>
+    <div class="fact">8. Deep Learning, the tech behind self-driving cars, uses <strong>neural networks</strong> designed to mimic the structural paths of human brain synapses.</div>
+    <div class="fact">9. Dark Data refers to the massive amount of unstructured data (such as raw logs, emails, or zip files) that organizations collect but completely fail to utilize.</div>
+    <div class="fact">10. <strong>Data Storytelling</strong> is widely considered the ultimate soft skill because even the best machine learning model is useless if executives can't understand its impact.</div>
+
+    <div class="fact">11. Netflix saves approximately <strong>$1 billion annually</strong> through its highly advanced, personalized AI recommendation system.</div>
+    <div class="fact">12. Modern Large Language Models (LLMs) are built using a breakthrough 2017 architecture called <strong>Transformers</strong>, which relies heavily on "attention mechanisms."</div>
+    <div class="fact">13. In binary storage, a <strong>Yottabyte</strong> is so colossally large that saving one would require data centers spanning the size of multiple small countries.</div>
+    <div class="fact">14. Machine Learning models are highly prone to <strong>algorithmic bias</strong>, meaning they will inherit and amplify human prejudices present in their training datasets.</div>
+    <div class="fact">15. The "Law of Large Numbers" guarantees that if you repeat an experiment enough times, your empirical average will merge with the true theoretical probability.</div>
+    <div class="fact">16. The most famous "unsupervised learning" technique is <strong>K-Means Clustering</strong>, which automatically groups similar items without any prior manual labeling.</div>
+    <div class="fact">17. <strong>Synthetic Data</strong> is artificial data created by computers that mimics real patterns, solving modern privacy concerns in medical and financial AI training.</div>
+    <div class="fact">18. Predictive maintenance uses IoT sensor data to forecast exactly when heavy industrial machinery is going to break, saving factories millions of dollars.</div>
+    <div class="fact">19. In neural network training, a <strong>"Gradient Descent"</strong> algorithm acts like an explorer walking down a foggy mountain to find the lowest point of error.</div>
+    <div class="fact">20. By 2030, real-time edge computing is expected to run complex AI models entirely on tiny wearable microchips, without sending data to a centralized cloud.</div>
+
+    <div id="footer"></div>
+  </div>
+
+  <script>
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+
+    function setTheme(isLight) {
+      body.classList.toggle('light-mode', isLight);
+      toggleBtn.textContent = isLight ? 'Terminal Mode' : 'Paper Mode';
+      localStorage.setItem('dataScienceFactsTheme', isLight ? 'light' : 'dark');
+    }
+
+    const savedTheme = localStorage.getItem('dataScienceFactsTheme');
+    setTheme(savedTheme === 'light');
+
+    toggleBtn.addEventListener('click', () => {
+      setTheme(!body.classList.contains('light-mode'));
+    });
+
+    fetch('footer')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('footer').innerHTML = data;
+      })
+      .catch(() => {
+        document.getElementById('footer').innerHTML = "<p>// System.out.println(\"Code and data shape the future.\");</p>";
+      });
+  </script>
+</body>
+</html>

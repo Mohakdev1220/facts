@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NDA Khadakwasla Facts - Army Edition</title>
+  
+  <!-- Changed Font to Anton (Bold, Impactful, Stencil-like) and maintained Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* Army-type Dark Theme (Olive, Slate, Steel) */
+      --bg-1: #1a2310; /* Dark Olive Drab */
+      --bg-2: #212529; /* Deep Slate/Charcoal */
+      --bg-3: #16181b; /* Near Black Steel */
+      --text: #e9ecef;
+      
+      /* Cards like rugged metal/concrete with a slight texture effect via noise overlay */
+      --card: rgba(33, 37, 41, 0.85); /* Slightly transparent to see background gradients */
+      --border: rgba(148, 163, 184, 0.4); /* Steel grey border */
+      --link: #f1c40f; /* Bronze/Gold for links */
+      --heading: #cad2c5; /* Pale Sage/Steel Grey */
+      --heading-accent: #f1c40f; /* Bronze accent */
+      --button-bg: rgba(255, 255, 255, 0.08);
+      --button-border: rgba(255, 255, 255, 0.14);
+      --shadow: 0 15px 35px rgba(0, 0, 0, 0.5); /* Deep shadow for weight */
+    }
+
+    body.light-mode {
+      /* Desert Camo / Urban Camo Theme */
+      --bg-1: #f3e9d2; /* Light Desert Sand */
+      --bg-2: #e0e0e0; /* Pale concrete/Urban camo grey */
+      --bg-3: #d0d0d0; /* Mid urban camo grey */
+      --text: #0d1117;
+      --card: rgba(224, 224, 224, 0.9);
+      --border: rgba(15, 23, 42, 0.18);
+      --link: #0a469a;
+      --heading: #1e3a8a;
+      --heading-accent: #a16207; /* Dark bronze/rust accent */
+      --button-bg: rgba(15, 23, 42, 0.06);
+      --button-border: rgba(15, 23, 42, 0.12);
+      --shadow: 0 15px 35px rgba(15, 23, 42, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      /* Base gradient for military background */
+      background:
+        linear-gradient(180deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+
+    /* Fixed background elements (Static Noise and Aurora) */
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Noise Texture Overlay for a rugged/distressed look */
+    body::before {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3%3Cfilter id='noiseFilter'%3%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3%3C/filter%3%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3%3C/svg%3%3E");
+      opacity: 0.1; /* Very subtle texture */
+      mix-blend-mode: overlay;
+    }
+
+    /* Aurora like light, now subtly drifting, like desert heat/light */
+    body::after {
+      background: linear-gradient(115deg, transparent 0 45%, rgba(202, 210, 197, 0.1) 48%, transparent 51% 100%);
+      opacity: 0.06;
+      transform: translateX(-30%);
+      animation: aurora 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes aurora {
+      from { transform: translateX(-40%) skewX(-12deg); }
+      to { transform: translateX(40%) skewX(-12deg); }
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 10px 0 25px;
+      font-family: 'Anton', sans-serif; /* Stencil-style military font */
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--heading);
+      letter-spacing: 1px;
+      text-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    h1 .accent {
+      color: var(--heading-accent);
+      position: relative;
+    }
+
+    /* Line accent for heading */
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--heading-accent);
+      border-radius: 2px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+    }
+
+    a {
+      color: var(--link);
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.9rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    a:hover {
+      border-color: var(--link);
+    }
+
+    .theme-btn {
+      border: 2px solid var(--button-border); /* Rugged border */
+      background: var(--button-bg);
+      color: var(--text);
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .theme-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 20px rgba(0,0,0,0.3);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .fact {
+      margin: 18px 0;
+      font-size: 1.12rem;
+      line-height: 1.7;
+      padding: 16px 20px;
+      background: var(--card);
+      border: 3px solid var(--border); /* Thicker, rugged metal border */
+      border-radius: 8px; /* Slightly more industrial */
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      position: relative;
+    }
+
+    /* Small decorative 'screw' heads on cards */
+    .fact::before, .fact::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--border);
+      border-radius: 50%;
+    }
+    .fact::before { top: 6px; left: 6px; }
+    .fact::after { bottom: 6px; right: 6px; }
+
+    .fact strong {
+      color: var(--heading-accent);
+      font-weight: 800;
+    }
+
+    #footer {
+      margin-top: 25px;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+
+    /* ANIMATED ICONS: Military Vehicles replacing Plane */
+    /* Tri-service icons */
+    .military-icon {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.4));
+      opacity: 0.3; /* Subtle presence */
+    }
+
+    /* Fighter Jet - faster and higher */
+    .fighter-jet {
+      top: 15%;
+      left: -150px;
+      font-size: 44px;
+      animation: flyJet 18s linear infinite;
+    }
+
+    /* Tank - slower and lower */
+    .tank {
+      top: 65%;
+      left: -150px;
+      font-size: 48px;
+      animation: driveTank 35s linear infinite;
+    }
+
+    @keyframes flyJet {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(5deg);
+      }
+      30% {
+        transform: translate3d(35vw, -30px, 0) rotate(2deg);
+      }
+      60% {
+        transform: translate3d(70vw, -10px, 0) rotate(0deg);
+      }
+      100% {
+        transform: translate3d(130vw, -40px, 0) rotate(-3deg);
+      }
+    }
+
+    @keyframes driveTank {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+      }
+      100% {
+        transform: translate3d(130vw, -10px, 0) rotate(0deg);
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px;
+      }
+
+      h1 {
+        font-size: clamp(2.2rem, 8vw, 3.2rem);
+      }
+
+      .fact {
+        font-size: 1rem;
+        padding: 14px 16px;
+        border-width: 2px;
+      }
+
+      .topbar {
+        align-items: center;
+        flex-direction: row; /* Keep it on one line if possible on small screens */
+        justify-content: space-between;
+      }
+
+      .theme-btn {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+      }
+
+      .military-icon {
+        opacity: 0.2;
+      }
+      .fighter-jet {
+        font-size: 36px;
+        top: 10%;
+      }
+      .tank {
+        font-size: 40px;
+        top: 70%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Military Icons instead of Plane -->
+  <div class="military-icon fighter-jet">🛩</div>
+  <div class="military-icon tank">🚜</div> <!-- Using a generic heavy vehicle emoji for tank -->
+
+  <div class="page">
+    <!-- Changed heading from Flight Facts to NDA Facts -->
+    <h1>20 <span class="accent">NDA</span> Facts</h1>
+
+    <div class="topbar">
+      <p style="margin:0;"><a href="index">&larr; Back to Home</a></p>
+      <button class="theme-btn" id="themeToggle" type="button">Desert Mode</button>
+    </div>
+
+    <div class="fact">1. The <strong>National Defence Academy (NDA)</strong> is the joint services academy of the Indian Armed Forces, where cadets of the Army, Navy, and Air Force train together before going to their respective pre-commission training academies.</div>
+    <div class="fact">2. Located in Khadakwasla near Pune, Maharashtra, the massive academy campus sprawls over <strong>7,015 acres</strong> of scenic, mountainous terrain.</div>
+    <div class="fact">3. NDA holds the proud distinction of being the <strong>world's first tri-service academy</strong>, pioneering the concept of joint military training.</div>
+    <div class="fact">4. The legendary motto of the NDA is <strong>"Seva Paramo Dharma"</strong> (Service Before Self), which was formally adopted in 1951 to replace the original "Service Before Self".</div>
+    <div class="fact">5. The main administrative hub of the campus, the majestic <strong>Sudan Block</strong>, is named in honor of the sacrifices made by Indian troops in the East African Campaign during World War II.</div>
+    <div class="fact">6. The construction of the Sudan Block was funded by a generous <strong>£100,000 gift</strong> from the Sudanese government in 1941 to thank Indian soldiers for defending their borders.</div>
+    <div class="fact">7. Cadets who graduate from the NDA receive a <strong>Bachelor's degree</strong> (B.A., B.Sc., or B.Tech) awarded by the prestigious Jawaharlal Nehru University (JNU), New Delhi.</div>
+    <div class="fact">8. Although the first course started in Clement Town, Dehradun in 1949, the Khadakwasla campus was formally inaugurated on <strong>January 16, 1955</strong>.</div>
+    <div class="fact">9. The ultimate honor for an NDA graduate is the <strong>President's Gold Medal</strong>, which is awarded to the best overall cadet of the passing-out course.</div>
+    <div class="fact">10. All NDA cadets are systematically organized into <strong>18 Squadrons</strong>, which are distributed across 5 Battalions. Each squadron boasts its own distinct flag and proud traditions.</div>
+
+    <div class="fact">11. To pay tribute to the ultimate sacrifice, the cadets constructed the <strong>"Hut of Remembrance"</strong> to honor academy alumni who laid down their lives in the line of duty.</div>
+    <div class="fact">12. The iconic <strong>Passing Out Parade (POP)</strong> of the academy is held at the Khetarpal Parade Ground, named after 2nd Lt. Arun Khetarpal, who was posthumously awarded the Param Vir Chakra.</div>
+    <div class="fact">13. The gorgeous <strong>Peacock Bay</strong> on the Khadakwasla Lake serves as the primary training ground for Naval cadets, where they learn seamanship, sailing, and water navigation.</div>
+    <div class="fact">14. Air Force cadets at the NDA undergo specialized <strong>glider training</strong> on the academy's Super Dimona gliders before they ever fly powered aircraft.</div>
+    <div class="fact">15. The rigorous physical training regimen at the academy includes cross-country runs, equestrian training (horse riding), survival camps, and intensive drill routines.</div>
+    <div class="fact">16. The final camp for sixth-term cadets, known as <strong>"Camp Greenhorn"</strong>, is a legendary rite of passage that tests physical endurance, navigation, and survival under highly simulated battle scenarios.</div>
+    <div class="fact">17. Following a historic Supreme Court ruling, the NDA officially welcomed its <strong>first batch of female cadets</strong> in 2022, marking a major milestone in Indian military history.</div>
+    <div class="fact">18. Alumni of the NDA have led India in every major conflict since independence and include <strong>three Param Vir Chakra awardees</strong> and dozens of Ashoka Chakra recipients.</div>
+    <div class="fact">19. The NDA has produced multiple Chiefs of Army Staff, Chiefs of Naval Staff, and Chiefs of Air Staff, occasionally leading all three service branches of the military simultaneously.</div>
+    <div class="fact">20. The academy’s training builds deep lifelong bonds across service branches, ensuring that Army, Navy, and Air Force commanders can coordinate seamlessly in times of national crisis.</div>
+
+    <div id="footer"></div>
+  </div>
+
+  <script>
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+
+    function setTheme(isLight) {
+      body.classList.toggle('light-mode', isLight);
+      toggleBtn.textContent = isLight ? 'Olive Mode' : 'Desert Mode'; /* Changed button text */
+      localStorage.setItem('ndaFactsTheme', isLight ? 'light' : 'dark');
+    }
+
+    const savedTheme = localStorage.getItem('ndaFactsTheme');
+    // Default to dark theme if no preference saved
+    setTheme(savedTheme === 'light');
+
+    toggleBtn.addEventListener('click', () => {
+      setTheme(!body.classList.contains('light-mode'));
+    });
+
+    // In a real setup, fetch the actual footer content.
+    fetch('footer')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('footer').innerHTML = data;
+      })
+      .catch(() => {
+        // Fallback or generic footer if fetch fails
+        document.getElementById('footer').innerHTML = "<p>&copy; facts-by-mohak. All Rights Reserved.</p>";
+      });
+  </script>
+</body>
+</html>
