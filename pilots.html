@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pilots | Facts by Mohak</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #0f172a; --bg-2: #1e293b; --bg-3: #020617; --text: #f8fafc;
+      --card: rgba(30, 41, 59, 0.55); --border: rgba(234, 179, 8, 0.15);
+      --accent: #eab308; --heading: #fef08a; --shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+    body.light-mode {
+      --bg-1: #fefce8; --bg-2: #fef08a; --bg-3: #ffffff; --text: #451a03;
+      --card: rgba(255, 255, 255, 0.85); --border: rgba(202, 138, 4, 0.18);
+      --accent: #ca8a04; --heading: #713f12; --shadow: 0 12px 30px rgba(202,138,4,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif; color: var(--text);
+      background: radial-gradient(circle at top, rgba(234, 179, 8, 0.1), transparent 45%), linear-gradient(180deg, var(--bg-1), var(--bg-2) 50%, var(--bg-3));
+      min-height: 100vh; overflow-x: hidden; transition: background 0.3s, color 0.3s; padding: 20px;
+    }
+    .page { max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
+    h1 { text-align: center; margin: 20px 0; font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); color: var(--heading); }
+    h1 span { color: var(--accent); }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; gap: 15px; }
+    .back-btn { color: var(--accent); font-weight: 700; text-decoration: none; border-bottom: 2px dashed var(--accent); }
+    .theme-btn, .search-box { background: var(--card); border: 1px solid var(--border); color: var(--text); font-family: inherit; font-weight: 700; border-radius: 12px; cursor: pointer; transition: 0.2s; }
+    .theme-btn { padding: 10px 18px; }
+    .theme-btn:hover { transform: translateY(-2px); }
+    .search-box { width: 100%; max-width: 400px; padding: 12px 18px; outline: none; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto; }
+    .search-box:focus { border-color: var(--accent); }
+    .fact { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin: 15px 0; line-height: 1.7; font-size: 1.05rem; box-shadow: var(--shadow); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: transform 0.2s; }
+    .fact:hover { transform: translateX(5px); border-color: var(--accent); }
+    .fact strong { color: var(--accent); }
+    #footer1 { margin-top: 40px; padding: 25px 0; border-top: 1px solid var(--border); text-align: center; font-size: 0.9rem; }
+    
+    /* Interactive Horizon pitch bar simulation */
+    .hud-horizon { position: fixed; top: 12%; left: 5%; width: 160px; height: 160px; border: 2px solid var(--accent); opacity: 0.08; pointer-events: none; border-radius: 8px; overflow: hidden; }
+    .hud-horizon::before { content: ''; position: absolute; width: 100%; height: 2px; background: var(--accent); top: 50%; left: 0; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="hud-horizon"></div>
+  <div class="page">
+    <h1><span>Pilots</span> Cockpit</h1>
+    <div class="topbar">
+      <a href="index.html" class="back-btn">&larr; Back Hub</a>
+      <button class="theme-btn" id="themeToggle">Light Mode</button>
+    </div>
+    <input type="text" class="search-box" id="search" placeholder="Search pilot facts...">
+    
+    <div id="factsList">
+      <div class="fact">1. <strong>Separate Dining:</strong> Captains and co-pilots are served entirely different meals to avoid the risk of simultaneous food poisoning.</div>
+      <div class="fact">2. <strong>Autopilot Trust:</strong> Modern pilots actively hand-fly the aircraft for only about 3 to 10 minutes, with autopilot handling the rest of the cruise.</div>
+      <div class="fact">3. <strong>Oxygen Caps:</strong> If a captain leaves the flight deck above 25,000 feet, the remaining pilot must wear an oxygen mask as a precaution.</div>
+      <div class="fact">4. <strong>Sleep Onboard:</strong> Cockpit pilots are permitted to take short 'controlled rest' breaks during long cruises while the other pilot monitors flight paths.</div>
+      <div class="fact">5. <strong>Lightning Striking:</strong> Commercial planes are struck by lightning approximately once a year, but the fuselage safely routes the electric charge away.</div>
+      <div class="fact">6. <strong>Third Engine Fail:</strong> Pilots are trained to glide aircraft safely to runways even if they suffer complete engine failure, using natural gravity and airspeed.</div>
+      <div class="fact">7. <strong>Windscreen Strength:</strong> Cockpit glass windscreens are incredibly thick, reinforced with heating elements to withstand bird strikes at high speeds.</div>
+      <div class="fact">8. <strong>Emergency RAT:</strong> When total electrical power is lost, a small Ram Air Turbine (RAT) drops into the airflow to power basic instruments.</div>
+      <div class="fact">9. <strong>No Beards allowed:</strong> Many airlines restrict pilots from wearing heavy beards so oxygen masks can form a tight, airtight seal.</div>
+      <div class="fact">10. <strong>Ultimate Authority:</strong> Once the cabin doors close, the Captain holds absolute legal authority, equivalent to a ship's master under maritime laws.</div>
+    </div>
+    <div id="footer1">&copy; 2026 Facts by Mohak. All Rights Reserved.</div>
+  </div>
+  <script>
+    const body = document.body, toggle = document.getElementById('themeToggle'), search = document.getElementById('search');
+    function setTheme(isLight) { body.classList.toggle('light-mode', isLight); toggle.textContent = isLight ? 'Dark Mode' : 'Light Mode'; localStorage.setItem('theme', isLight ? 'light' : 'dark'); }
+    setTheme(localStorage.getItem('theme') === 'light');
+    toggle.addEventListener('click', () => setTheme(!body.classList.contains('light-mode')));
+    search.addEventListener('keyup', () => {
+      const val = search.value.toLowerCase();
+      document.querySelectorAll('.fact').forEach(f => f.classList.toggle('hidden', !f.innerText.toLowerCase().includes(val)));
+    });
+  </script>
+</body>
+</html>
