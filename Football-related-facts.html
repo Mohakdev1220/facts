@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ultimate Football Facts Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #020617;
+      --bg-2: #0b1329;
+      --bg-3: #05070f;
+      --text: #f8fafc;
+      --card: rgba(13, 18, 34, 0.6);
+      --border: rgba(0, 255, 135, 0.15);
+      --link: #00ff87;
+      --heading: #38bdf8;
+      --heading-accent: #00ff87;
+      --button-bg: rgba(255, 255, 255, 0.06);
+      --button-border: rgba(255, 255, 255, 0.12);
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    body.light-mode {
+      --bg-1: #eef9f3;
+      --bg-2: #f4fbf7;
+      --bg-3: #ffffff;
+      --text: #0f172a;
+      --card: rgba(255, 255, 255, 0.8);
+      --border: rgba(15, 23, 42, 0.1);
+      --link: #008746;
+      --heading: #1e3a8a;
+      --heading-accent: #0d9488;
+      --button-bg: rgba(15, 23, 42, 0.05);
+      --button-border: rgba(15, 23, 42, 0.1);
+      --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(0, 255, 135, 0.12), transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.1), transparent 25%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Floating Stadium Starfield Drift */
+    body::before {
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(0,255,135,0.4) 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 2px);
+      background-size: 150px 150px, 240px 240px, 350px 350px;
+      background-position: 0 0, 50px 70px, 120px 40px;
+      opacity: 0.3;
+      animation: drift 50s linear infinite;
+    }
+
+    /* Neon Stadium Glow Aurora Effect */
+    body::after {
+      background: linear-gradient(115deg, transparent 0 45%, rgba(0, 255, 135, 0.08) 48%, transparent 51% 100%);
+      opacity: 0.12;
+      transform: translateX(-30%);
+      animation: aurora 16s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-150px, 100px, 0); }
+    }
+    @keyframes aurora {
+      from { transform: translateX(-25%) skewX(-8deg); }
+      to { transform: translateX(25%) skewX(-8deg); }
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 940px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 15px 0 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 700;
+      color: var(--heading);
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+    h1 .accent { color: var(--heading-accent); }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    a {
+      color: var(--link);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      transition: opacity 0.2s;
+    }
+    a:hover { opacity: 0.8; }
+
+    .theme-btn {
+      border: 1px solid var(--button-border);
+      background: var(--button-bg);
+      color: var(--text);
+      padding: 10px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: var(--shadow);
+    }
+    .theme-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .fact {
+      margin: 16px 0;
+      font-size: 1.1rem;
+      line-height: 1.65;
+      padding: 16px 20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .fact:hover {
+      transform: translateX(4px);
+      border-color: rgba(0, 255, 135, 0.4);
+    }
+    .fact strong { color: var(--heading-accent); }
+
+    #footer1 {
+      margin-top: 40px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      font-size: 0.95rem;
+      color: var(--text);
+      opacity: 0.8;
+    }
+
+    /* Floating Rolling Soccer Ball Animation */
+    .soccer-ball {
+      position: fixed;
+      top: 20%;
+      left: -100px;
+      font-size: 38px;
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.3));
+      animation: shoot 20s linear infinite;
+    }
+
+    @keyframes shoot {
+      0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+      35% { transform: translate3d(40vw, 40px, 0) rotate(180deg); }
+      70% { transform: translate3d(80vw, -20px, 0) rotate(360deg); }
+      100% { transform: translate3d(120vw, 60px, 0) rotate(720deg); }
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 15px; }
+      .fact { font-size: 1rem; padding: 14px 16px; }
+      .topbar { flex-direction: column; align-items: flex-start; gap: 14px; }
+      .soccer-ball { font-size: 28px; top: 15%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="soccer-ball">⚽</div>
+
+  <div class="page">
+    <h1>20 <span class="accent">Incredible</span> Football Facts</h1>
+    
+    <div class="topbar">
+      <p style="margin:0;"><a href="index">&larr; Back to Home</a></p>
+      <button class="theme-btn" id="themeToggle" type="button">Light Mode</button>
+    </div>
+
+    <!-- 20 Pure Football Fact Cards Sorted Systematically -->
+    <div class="fact">1. <strong>Origin:</strong> Football was originally invented in China around 476 BC, where it was called 'Cuju' and played with a leather ball stuffed with feathers.</div>
+    <div class="fact">2. <strong>Historic Scoring:</strong> The highest-scoring football game in history took place in 2002, ending in a staggering 149-0 scoreline between AS Adema and SO l'Emyrne.</div>
+    <div class="fact">3. <strong>Production Capital:</strong> More than 80% of the world's professional footballs are manufactured in a single city: Sialkot, located in Pakistan.</div>
+    <div class="fact">4. <strong>Climate Limits:</strong> Greenland cannot officially join FIFA because the extreme arctic climate prevents them from growing sustainable grass pitches.</div>
+    <div class="fact">5. <strong>Lightning Speed:</strong> The fastest goal in professional football history was scored by Gavin Stokes in just 2.1 seconds straight from the kickoff whistle.</div>
+    <div class="fact">6. <strong>Perfect Grid:</strong> Cristiano Ronaldo has achieved the near-impossible feat of scoring a competitive goal in every single minute layout from 1 to 90.</div>
+    <div class="fact">7. <strong>Solid Gold Trophy:</strong> The official FIFA World Cup trophy is crafted using solid 18-karat gold and weighs approximately 6.1 kilograms.</div>
+    <div class="fact">8. <strong>Television Debut:</strong> The first official live TV broadcast of a football match took place in 1937, featuring a friendly between Arsenal and their reserve squad.</div>
+    <div class="fact">9. <strong>Endurance Athletics:</strong> An average professional outfield football player runs between 10 to 13 kilometers throughout a single standard 90-minute match.</div>
+    <div class="fact">10. <strong>Nature Strike:</strong> In 1998, a freak lightning strike tragically killed an entire 11-man football team in the DRC, while the opposing team walked away unharmed.</div>
+    <div class="fact">11. <strong>The King's Record:</strong> The legendary Pelé holds the unbroken world record for winning the most FIFA World Cup winner medals, capturing 3 career titles.</div>
+    <div class="fact">12. <strong>First International:</strong> The first official international football fixture in history was played all the way back in 1872 between traditional rivals Scotland and England.</div>
+    <div class="fact">13. <strong>Colossal Arena:</strong> The largest operational stadium in the world is the Rungrado 1st of May Stadium, located in Pyongyang, North Korea, holding over 114,000 spectators.</div>
+    <div class="fact">14. <strong>Timeless Design:</strong> The overall sphere shape and dimensional proportions of the modern football have remained practically unchanged for over 120 historic years.</div>
+    <div class="fact">15. <strong>Golden Streak:</strong> Lionel Messi secured a historic world record by winning 4 consecutive Ballon d'Or awards between the years 2009 and 2012.</div>
+    <div class="fact">16. <strong>Modern Era Break:</strong> The English Premier League (EPL) as we know it today was officially founded and separated from the old Football League system in 1992.</div>
+    <div class="fact">17. <strong>Early Entry:</strong> The youngest professional football debut was made by Mauricio Baldivieso, who entered a top-flight Bolivian league match at just 12 years old.</div>
+    <div class="fact">18. <strong>Flawless Strategy:</strong> The iconic Zinedine Zidane was notoriously never once caught in an offside position throughout his entire UEFA Champions League career.</div>
+    <div class="fact">19. <strong>Inaugural Tournament:</strong> The first FIFA World Cup tournament ever held was hosted and won by Uruguay in 1930, featuring just 13 invitational nations.</div>
+    <div class="fact">20. <strong>Wild Delay:</strong> A top-tier club match in the Norwegian league was once officially delayed because a massive swarm of aggressive bees occupied one of the goalposts.</div>
+
+    <!-- Requested footer1 Div Container Component -->
+    <div id="footer1">
+      <p>&copy; 2026 KickOff Facts. All Rights Reserved.</p>
+    </div>
+  </div>
+
+  <script>
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+
+    function setTheme(isLight) {
+      body.classList.toggle('light-mode', isLight);
+      toggleBtn.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+      localStorage.setItem('footballFactsTheme', isLight ? 'light' : 'dark');
+    }
+
+    const savedTheme = localStorage.getItem('footballFactsTheme');
+    setTheme(savedTheme === 'light');
+
+    toggleBtn.addEventListener('click', () => {
+      setTheme(!body.classList.contains('light-mode'));
+    });
+
+    // Dynamic Footer async data hook as per your layout blueprint
+    fetch('footer')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('footer1').innerHTML = data;
+      })
+      .catch(() => {
+        // Fallback default inline branding if component template isn't available
+        console.log("Custom footer component loaded locally via inline fallback.");
+      });
+  </script>
+</body>
+</html>
