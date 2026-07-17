@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aviation World Records | Facts by Mohak</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #0a0401; --bg-2: #140803; --bg-3: #080301; --text: #fdfefe;
+      --card: rgba(24, 10, 4, 0.55); --border: rgba(249, 115, 22, 0.18);
+      --accent: #f97316; --heading: #ffedd5; --shadow: 0 12px 30px rgba(0,0,0,0.6);
+    }
+    body.light-mode {
+      --bg-1: #fff7ed; --bg-2: #ffedd5; --bg-3: #ffffff; --text: #431407;
+      --card: rgba(255, 255, 255, 0.85); --border: rgba(234, 88, 12, 0.18);
+      --accent: #ea580c; --heading: #7c2d12; --shadow: 0 12px 30px rgba(234,88,12,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif; color: var(--text);
+      background: radial-gradient(circle at top, rgba(249, 115, 22, 0.12), transparent 45%), linear-gradient(180deg, var(--bg-1), var(--bg-2) 50%, var(--bg-3));
+      min-height: 100vh; overflow-x: hidden; transition: background 0.3s, color 0.3s; padding: 20px;
+    }
+    .page { max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
+    h1 { text-align: center; margin: 20px 0; font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.5rem); color: var(--heading); }
+    h1 span { color: var(--accent); }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; gap: 15px; }
+    .back-btn { color: var(--accent); font-weight: 700; text-decoration: none; border-bottom: 2px dashed var(--accent); }
+    .theme-btn, .search-box { background: var(--card); border: 1px solid var(--border); color: var(--text); font-family: inherit; font-weight: 700; border-radius: 12px; cursor: pointer; transition: 0.2s; }
+    .theme-btn { padding: 10px 18px; }
+    .theme-btn:hover { transform: translateY(-2px); }
+    .search-box { width: 100%; max-width: 400px; padding: 12px 18px; outline: none; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto; }
+    .search-box:focus { border-color: var(--accent); }
+    .fact { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin: 15px 0; line-height: 1.7; font-size: 1.05rem; box-shadow: var(--shadow); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: transform 0.2s; }
+    .fact:hover { transform: translateX(5px); border-color: var(--accent); }
+    .fact strong { color: var(--accent); }
+    #footer1 { margin-top: 40px; padding: 25px 0; border-top: 1px solid var(--border); text-align: center; font-size: 0.9rem; }
+    
+    /* Hypersonic streak animation */
+    .rocket-streak { position: fixed; top: 10%; left: -100px; font-size: 40px; opacity: 0.25; pointer-events: none; animation: recordStreak 10s linear infinite; }
+    @keyframes recordStreak {
+      0% { transform: translate3d(0, 0, 0) scale(0.6); }
+      100% { transform: translate3d(120vw, -100px, 0) scale(1.4); }
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="rocket-streak">💫</div>
+  <div class="page">
+    <h1><span>Aviation</span> Records</h1>
+    <div class="topbar">
+      <a href="index.html" class="back-btn">&larr; Back Hub</a>
+      <button class="theme-btn" id="themeToggle">Light Mode</button>
+    </div>
+    <input type="text" class="search-box" id="search" placeholder="Search world records...">
+    
+    <div id="factsList">
+      <div class="fact">1. <strong>Ultimate Airspeed:</strong> The world record for the fastest manned airbreathing aircraft is held by the Lockheed SR-71 Blackbird at 2,193 mph.</div>
+      <div class="fact">2. <strong>Highest Ascent:</strong> Alexandr Fedotov holds the absolute altitude record for a jet aircraft, reaching 123,524 feet in a MiG-25 back in 1977.</div>
+      <div class="fact">3. <strong>Longest Voyage:</strong> Singapore Airlines operates the longest scheduled commercial route, covering 9,537 miles from Singapore to New York in 19 hours.</div>
+      <div class="fact">4. <strong>Greatest Wingspan:</strong> The Scaled Composites Stratolaunch holds the world wingspan record at 385 feet, designed to launch orbital rockets.</div>
+      <div class="fact">5. <strong>Non-Stop Solo:</strong> Steve Fossett holds the world record for the longest solo, non-stop flight, flying 26,389 miles around the globe in 76 hours.</div>
+      <div class="fact">6. <strong>Shortest Airline Route:</strong> The flight between Westray and Papa Westray in Scotland holds the record for the shortest scheduled flight, taking just 47 seconds.</div>
+      <div class="fact">7. <strong>Billionaire Bomber:</strong> The Northrop Grumman B-2 Spirit holds the record for the most expensive military aircraft, costing over $2.1 billion per unit.</div>
+      <div class="fact">8. <strong>Busiest Jet Runway:</strong> Atlanta Hartsfield-Jackson International airport holds the continuous world record for carrying the most passengers in a calendar year.</div>
+      <div class="fact">9. <strong>Youngest Solo:</strong> Travis Ludlow became the youngest pilot to fly solo around the world in 2021, completing the voyage at just 18 years of age.</div>
+      <div class="fact">10. <strong>Heaviest Cargo:</strong> The largest load ever airlifted was 545,000 lbs, carried inside the giant Antonov An-225 Mriya cargo plane.</div>
+    </div>
+    <div id="footer1">&copy; 2026 Facts by Mohak. All Rights Reserved.</div>
+  </div>
+  <script>
+    const body = document.body, toggle = document.getElementById('themeToggle'), search = document.getElementById('search');
+    function setTheme(isLight) { body.classList.toggle('light-mode', isLight); toggle.textContent = isLight ? 'Dark Mode' : 'Light Mode'; localStorage.setItem('theme', isLight ? 'light' : 'dark'); }
+    setTheme(localStorage.getItem('theme') === 'light');
+    toggle.addEventListener('click', () => setTheme(!body.classList.contains('light-mode')));
+    search.addEventListener('keyup', () => {
+      const val = search.value.toLowerCase();
+      document.querySelectorAll('.fact').forEach(f => f.classList.toggle('hidden', !f.innerText.toLowerCase().includes(val)));
+    });
+  </script>
+</body>
+</html>
