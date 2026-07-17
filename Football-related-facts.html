@@ -265,7 +265,7 @@
     fetch('footer')
       .then(res => res.text())
       .then(data => {
-        document.getElementById('footer1').innerHTML = data;
+        document.getElementById('footer').innerHTML = data;
       })
       .catch(() => {
         // Fallback default inline branding if component template isn't available
