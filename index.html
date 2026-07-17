@@ -25,6 +25,10 @@
     /* Special colors for starting 3 cards (Light Mode) */
     --featured-bg: linear-gradient(135deg, #eef5ff 0%, #e0ecff 100%);
     --featured-border: #cbd5e1;
+
+    /* Beautiful Subtle Red for Football Card (Light Mode) */
+    --football-bg: linear-gradient(135deg, #fff5f5 0%, #ffe3e3 100%);
+    --football-border: #ffc9c9;
 }
 
 body.dark{
@@ -39,6 +43,10 @@ body.dark{
     /* Special colors for starting 3 cards (Dark Mode) */
     --featured-bg: linear-gradient(135deg, #131d2e 0%, #1a273b 100%);
     --featured-border: #2e3e56;
+
+    /* Beautiful Subtle Red for Football Card (Dark Mode) */
+    --football-bg: linear-gradient(135deg, #201013 0%, #2d1216 100%);
+    --football-border: #4a1c22;
 }
 
 *{
@@ -180,6 +188,13 @@ header{
     background: var(--featured-bg);
     border: 1px solid var(--featured-border);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+/* Red styling for Football Card */
+.football-card {
+    background: var(--football-bg);
+    border: 1px solid var(--football-border);
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.04);
 }
 
 .card h3{
@@ -324,10 +339,13 @@ footer{
             <h3>📊 DATA SCIENCE</h3>
             <p>Explore facts Related to Data science</p>
         </a>
- <a class="card featured-card" href="Football-related-facts">
+
+        <!-- Football Card with Beautiful Subtle Red class added -->
+        <a class="card football-card" href="Football-related-facts">
             <h3> ⚽Football </h3>
             <p>Explore facts related to Football.</p>
         </a> 
+
         <a class="card" href="space">
             <h3>🚀 SPACE</h3>
             <p>Explore planets, stars, galaxies and the mysteries of the universe.</p>
